@@ -46,19 +46,19 @@
                                 <em></em>
                                 <em></em>
                             </div>
-                            <div class="weather__city">
-                                <em>Swimming Pool</em>
-                                <div class="weather__city__list">
-                                    <ul>
-                                        <li class="active">
-                                            <a href="#">Indoor Climbing</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Yoga</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
+                            <%--<div class="weather__city">--%>
+                                <%--<em>Swimming Pool</em>--%>
+                                <%--<div class="weather__city__list">--%>
+                                    <%--<ul>--%>
+                                        <%--<li class="active">--%>
+                                            <%--<a href="#">Indoor Climbing</a>--%>
+                                        <%--</li>--%>
+                                        <%--<li>--%>
+                                            <%--<a href="#">Yoga</a>--%>
+                                        <%--</li>--%>
+                                    <%--</ul>--%>
+                                <%--</div>--%>
+                            <%--</div>--%>
                         </div>
                     </div>
                 </div>
@@ -221,6 +221,7 @@
 
 <!--                         </div> -->
 <!--                     </div> -->
+
                     <c:forEach items="${ps}" var="p">
                     <a href="foreparking?pid=${p.id}">
                     <div class="special">
@@ -234,9 +235,9 @@
                     </a>
                     </c:forEach>
                 </div>
-           
+
             </div>
-            
+
         </div>
     </div>
 </section>

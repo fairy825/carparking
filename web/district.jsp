@@ -176,49 +176,40 @@
     <div class="container">
         <div class="col-md-4 col-sm-6">
             <div class="table-item">
-                <h4>游泳馆</h4>
-                <span>20元/每小时</span>
+                <h4>中山公园</h4>
+                <span>附近停车场：3</span>
                 <ul>
-                    <li>成人儿童分区</li>
-                    <li>自备泳衣</li>
-                    <li>浴室开放</li>
-                    <li>提供游泳圈</li>
-                    <li>8：00-20：00</li>
+                    <li>手机买单</li>
+                    <li>会员优惠</li>
                 </ul>
                 <div class="simple-btn">
-                    <a href="#">Venue</a>
+                    <a href="#">Booking</a>
                 </div>
             </div>
         </div>
         <div class="col-md-4 col-sm-6">
             <div class="table-item premium-item">
-                <h4>攀岩馆</h4>
-                <span>20元/每小时</span>
+                <h4>兴业太古汇</h4>
+                <span>附近停车场：4</span>
                 <ul>
-                    <li>成人儿童分区</li>
-                    <li>自备装备</li>
-                    <li>提供教练</li>
-                    <li>提供医疗设备</li>
-                    <li>8：00-20：00</li>
+                    <li>凭小票免费停车</li>
+                    <li>手机买单</li>
                 </ul>
                 <div class="simple-btn">
-                    <a href="#">Venue</a>
+                    <a href="#">Booking</a>
                 </div>
             </div>
         </div>
         <div class="col-md-4 col-sm-6">
             <div class="table-item">
-                <h4>瑜伽馆</h4>
-                <span>20元/每小时</span>
+                <h4>爱琴海购物公园</h4>
+                <span>附近停车场：3</span>
                 <<ul>
-                <li>成人儿童分区</li>
-                <li>自备瑜伽垫</li>
-                <li>提供教练</li>
-                <li>注意做好准备活动</li>
-                <li>8：00-20：00</li>
+                <li>消费积分抵扣</li>
+                <li>扫码停车</li>
             </ul>
                 <div class="simple-btn">
-                    <a href="#">Venue</a>
+                    <a href="#">Booking</a>
                 </div>
             </div>
         </div>

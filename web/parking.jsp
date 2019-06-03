@@ -27,24 +27,24 @@
     <title>Parking</title>
 </head>
 <script>
-  
+
 $(function(){
     $("a .booklink").click(function(){
     	alert("1");
-    	
+
         var page = "forecheckLogin";
         $.get(
                 page,
                 function(result){
                     if("success"==result){
-                        
+
                         location.href= $(".booklink").attr("href");
                     }
                     else{
-                        $("#loginModal").modal('show');                    
+                        $("#loginModal").modal('show');
                     }
                 }
-        );     
+        );
         return false;
     });
 })
@@ -71,19 +71,19 @@ $(function(){
                                 <em></em>
                                 <em></em>
                             </div>
-                            <div class="weather__city">
-                                <em>Swimming Pool</em>
-                                <div class="weather__city__list">
-                                    <ul>
-                                        <li class="active">
-                                            <a href="#">Indoor Climbing</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Yoga</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
+                            <%--<div class="weather__city">--%>
+                                <%--&lt;%&ndash;<em>Swimming Pool</em>&ndash;%&gt;--%>
+                                <%--<div class="weather__city__list">--%>
+                                    <%--<ul>--%>
+                                        <%--<li class="active">--%>
+                                            <%--<a href="#">Indoor Climbing</a>--%>
+                                        <%--</li>--%>
+                                        <%--<li>--%>
+                                            <%--<a href="#">Yoga</a>--%>
+                                        <%--</li>--%>
+                                    <%--</ul>--%>
+                                <%--</div>--%>
+                            <%--</div>--%>
                         </div>
                     </div>
                 </div>
@@ -216,74 +216,75 @@ $(function(){
     <div class="container">
         <div class="row">
             <div class="productPageDiv">
- 
+
     <%@include file="imgAndInfo.jsp" %>
+                <section>
+                    <div class="wrap wrap_gray pt20" >
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-sm-6" style="position: relative;width: 860px" >
+                                    <div class="block-title">
+                                        <h2 class="block-title__h2">开始预约</h2>
+                                    </div>
+                                    <div class="thumbnail thumbnail_big">
+                                        <div class="row">
+                                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                                <div class="panel panel-default text-left no-boder">
+                                                    <div class="panel-heading">
+                                                        可预约列表
+                                                    </div>
+                                                    <div class="panel-body">
+                                                        <div class="table-responsive">
+                                                            <table class="table table-striped table-bordered table-hover" id="dataTables-categoris">
+                                                                <thead>
+                                                                <tr>
+                                                                    <!--                                                     <th>预约日期</th> -->
+                                                                    <th>起始时间</th>
+                                                                    <th>结束时间</th>
+                                                                    <th>剩余车位</th>
+
+                                                                    <th>操作</th>
+                                                                </tr>
+                                                                </thead>
+                                                                <tbody id="tbody-categoris">
+                                                                <c:forEach items="${p.timeSlots}" var="t">
+                                                                    <tr>
+                                                                            <%--                                                     <td th:text="${v.date}"></td> --%>
+                                                                        <td>${t.beginTime}:00</td>
+                                                                        <td>${t.beginTime+1}:00</td>
+                                                                        <td>${t.seat}</td>
+
+                                                                        <td>
+                                                                            <a class="booklink" href="forecreateBooking?tid=${t.id}"><i class="fa fa-minus-square" style="color: red"></i> 预约
+                                                                            </a>
+                                                                        </td>
+                                                                    </tr>
+                                                                </c:forEach>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </section>
 
     <%@include file="parkingMessage.jsp" %>
-     
+
     <%@include file="parkingDetail.jsp" %>
 </div>
         </div>
     </div>
 </section>
-<section>
-    <div class="wrap wrap_gray pt20" >
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-6" style="position: relative;margin-bottom: 5cm;width: 860px" >
-                    <div class="block-title">
-                        <h2 class="block-title__h2">开始预约</h2>
-                    </div>
-                    <div class="thumbnail thumbnail_big">
-                        <div class="row">
-                            <div class="col-md-12 col-sm-12 col-xs-12">
-                                <div class="panel panel-default text-left no-boder">
-                                    <div class="panel-heading">
-                                        可预约列表
-                                    </div>
-                                    <div class="panel-body">
-                                        <div class="table-responsive">
-                                            <table class="table table-striped table-bordered table-hover" id="dataTables-categoris">
-                                                <thead>
-                                                <tr>
-<!--                                                     <th>预约日期</th> -->
-                                                    <th>起始时间</th>
-                                                    <th>结束时间</th>
-                                                    <th>剩余车位</th>
-                                                    
-                                                    <th>操作</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody id="tbody-categoris">
-                                                 <c:forEach items="${p.timeSlots}" var="t">
-                                                <tr>
-<%--                                                     <td th:text="${v.date}"></td> --%>
-                                                    <td>${t.beginTime}:00</td>
-                                                    <td>${t.beginTime+1}:00</td>
-                                                    <td>${t.seat}</td>
-                                                    
-                                                    <td>
-                                                            <a class="booklink" href="forecreateBooking?tid=${t.id}"><i class="fa fa-minus-square" style="color: red"></i> 预约
-                                                            </a>
-                                                    </td>
-                                                </tr>
-                                                </c:forEach>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
-                    </div>
-                </div>
-            </div>
-
-
-        </div>
-    </div>
-</section>
 <!-- END Footer -->
 
 <!-- Footer -->

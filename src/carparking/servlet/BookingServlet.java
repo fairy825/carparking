@@ -28,19 +28,19 @@ public class BookingServlet extends BaseBackServlet {
 	}
 */
 	public String edit(HttpServletRequest request, HttpServletResponse response, Page page) {
-		return null;	
+		return null;
 	}
 	public String update(HttpServletRequest request, HttpServletResponse response, Page page) {
 		return null;
 	}
 	public String list(HttpServletRequest request, HttpServletResponse response, Page page) {
 		List<Booking> bs = bookingDAO.list(page.getStart(),page.getCount());
-		timeSlotDAO.fill(bs);
+//		timeSlotDAO.fill(bs);
 		int total = bookingDAO.getTotal();
 		page.setTotal(total);
 		request.setAttribute("bs", bs);
 		request.setAttribute("page", page);
-		
+
 		return "admin/listBooking.jsp";
 	}
 }
