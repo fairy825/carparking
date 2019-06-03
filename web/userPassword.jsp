@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -10,7 +10,7 @@
     <meta content="telephone=no" name="format-detection">
     <!-- favicon -->
     <!-- custom CSS -->
-    <link href="../static/css/main.css" rel="stylesheet" type="text/css"  th:href="@{~/css/main.css}"/>
+    <link href="static/css/main.css" rel="stylesheet" type="text/css"  th:href="@{~/css/main.css}"/>
     <!-- END custom CSS -->
 
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js" th:href="@{https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js}"></script>
@@ -18,8 +18,34 @@
     <![endif]-->
     <title>修改密码</title>
 </head>
+<%@include file="include/header.jsp" %>
+
 <body>
 <!-- Header -->
+<script>
+$(function(){
+     
+    <c:if test="${!empty msg}">
+    $("span.errorMessage").html("${msg}");
+    $("div.registerErrorMessageDiv").css("visibility","visible");      
+    </c:if>
+     
+    $("#passForm").submit(function(){
+      
+        if(0==$("#formerPassword").val().length){
+            $("span.errorMessage").html("请输入原密码");
+            $("div.registerErrorMessageDiv").css("visibility","visible");          
+            return false;
+        }      
+        if(0==$("#laterPassword").val().length){
+            $("span.errorMessage").html("请输入新密码");
+            $("div.registerErrorMessageDiv").css("visibility","visible");          
+            return false;
+        }      
+        return true;
+    });
+})
+</script>
 <header id="header" class="header">
     <div class="header__top">
         <div class="container">
@@ -213,15 +239,21 @@
 
 
 <div id="content">
-    <form class="form-signin" action="http://localhost:8080/user/updatePassword?password=fb701701" name="reg" >
+<div class="registerErrorMessageDiv">
+        <div class="alert alert-danger" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
+            <span class="errorMessage"></span>
+        </div>       
+    </div>
+    <form id="passForm" class="form-signin" action="forechangePassword" name="reg" >
         <lable  style="color: mintcream">输入原密码</lable>
-        <input type="password"  id="successfulInput" class="form-control">
+        <input id="formerPass" class="formerPass" type="password" name="originalPassword" id="successfulInput" class="form-control">
         <br><br>
         <lable  style="color: mintcream">输入新密码</lable>
-        <input type="password" name="password" id="successfulInput"  class="form-control">
+        <input id="laterPass" class="laterPass" type="password" name="newPassword" id="successfulInput"  class="form-control">
         <br><br>
-
-        <button type="submit" class="btn btn-primary" id="btn-reg">提交</button>
+        <input type="hidden" name="id" value="${user.id}">
+        <button type="submit" class="btn btn-primary passwordSubmit" id="btn-reg">提交</button>
     </form>
 </div>
 
@@ -274,9 +306,9 @@
 </footer>
 <!-- END Footer -->
 <!-- All JavaScript libraries -->
-<script src="../static/js/jquery.min.js" th:src="@{~/js/jquery.min.js}"></script>
-<script src="../static/js/bootstrap.min.js" th:src="@{~/js/bootstrap.min.js}"></script>
+<script src="static/js/jquery.min.js" th:src="@{~/js/jquery.min.js}"></script>
+<script src="static/js/bootstrap.min.js" th:src="@{~/js/bootstrap.min.js}"></script>
 <!-- Custom JavaScript -->
-<script src="../static/js/main.js" th:src="@{~/js/main.js}"></script>
+<script src="static/js/main.js" th:src="@{~/js/main.js}"></script>
 </body>
 </html>

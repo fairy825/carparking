@@ -26,7 +26,7 @@ public class BaseForeServlet extends HttpServlet{
 		try {
 			
 			int start= 0;
-			int count = 10;
+			int count = 5;
 			try {
 				start = Integer.parseInt(request.getParameter("page.start"));
 			} catch (Exception e) {

@@ -25,6 +25,11 @@
             </div>
         </c:forEach>
     </div>
+    
+    	<div class="pageDiv">
+		<%@include file="include/admin/adminPage.jsp" %>
+	</div>
+	
     </c:if>
      
     <c:if test="${param.showonly!=true}">

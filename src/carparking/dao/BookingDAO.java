@@ -23,11 +23,27 @@ public class BookingDAO {
 	public static final String finish = "finish";
 	public static final String delete = "delete";
 	
-    public int getTotal() {
+	public int getTotal() {
         int total = 0;
         try (Connection c = DBUtil.getConnection(); Statement s = c.createStatement();) {
  
             String sql = "select count(*) from Booking";
+ 
+            ResultSet rs = s.executeQuery(sql);
+            while (rs.next()) {
+                total = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+ 
+            e.printStackTrace();
+        }
+        return total;
+    }
+	public int getTotal(int uid) {
+        int total = 0;
+        try (Connection c = DBUtil.getConnection(); Statement s = c.createStatement();) {
+ 
+            String sql = "select count(*) from Booking where uid = "+uid;
  
             ResultSet rs = s.executeQuery(sql);
             while (rs.next()) {

@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -10,13 +10,13 @@
     <meta content="telephone=no" name="format-detection">
     <!-- favicon -->
     <!-- custom CSS -->
-    <link href="../static/css/main.css" rel="stylesheet" type="text/css"  th:href="@{~/css/main.css}"/>
+    <link href="static/css/main.css" rel="stylesheet" type="text/css"  th:href="@{~/css/main.css}"/>
     <!-- END custom CSS -->
 
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js" th:href="@{https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js}"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js" th:href="@{https://oss.maxcdn.com/respond/1.4.2/respond.min.js}"></script>
     <![endif]-->
-    <title>留言浏览</title>
+    <title>修改个人信息</title>
 </head>
 <body>
 <!-- Header -->
@@ -80,7 +80,7 @@
 
                         <li class="active">
                             <span class="wsmenu-click"></span>
-                            <a href="http://localhost:8080/user/signIn?name=fbo&password=fb701701">首页</a>
+                            <a href="index.html">首页</a>
                         </li>
                         <li>
                             <span class="wsmenu-click"></span>
@@ -104,20 +104,19 @@
                             <span class="wsmenu-click"></span>
                             <a href="http://localhost:8080/message/messageList">留言</a>
                         </li>
-
                         <li>
                             <span class="wsmenu-click"></span>
-                            <a  >个人中心
+                            <a  th:each="u: ${user}" th:href="@{/user/look(id=${u.id})}">个人中心
                                 <span class="arrow"></span>
                             </a>
 
                             <ul class="wsmenu-submenu">
                                 <li>
-                                    <a href="http://localhost:8080/booking/look?id=1"  >订单查看</a>
+                                    <a  th:each="u: ${user}" th:href="@{/booking/look(id=${u.id})}"  >订单查看</a>
 
                                 </li>
                                 <li>
-                                    <a >修改信息</a>
+                                    <a th:each="u: ${user}" th:href="@{/user/look(id=${u.id})}">修改信息</a>
                                 </li>
 
                             </ul>
@@ -193,6 +192,10 @@
         width:800px;
         float:right;
         padding:15px;
+        position:relative;
+        margin-bottom: 11cm;
+        margin-left: -10cm;
+        margin-right: 4cm;
     }
     #footer {
         background-color:cornflowerblue;
@@ -202,36 +205,30 @@
         padding:5px;
     }
 </style>
-<div id="register_div" class="col-md-2"style="background-color: #7B7B7B">
+<div id="register_div" class="col-md-2" style="background-color:#7B7B7B">
     <div id="left">
-        <h class="form-signin-heading" style="color: mintcream">留言板块</h>
+        <h class="form-signin-heading" style="color: mintcream">个人中心</h><p></p>
+            <a style="color: mintcream" href="forepassword?id=${user.id}"> 修改密码
+            </a>
     </div>
 </div>
 
-<div id="section">
-    <div class="container" >
-        <div class="col-md-4">
-            <form class="form-signin" action="/message/insert" name="reg" >
-                <h2 class="form-signin-heading" align="center" style="color: mintcream">留言板</h2>
-                <label style="color: mintcream">留言内容</label>
-                <textarea name="content" id="content1" class="form-control" placeholder="请输入留言" required autofocus  ></textarea><br>
-                <label style="color: mintcream">姓名</label>
-                <input type="text" name="userName" id="name"  class="form-control" placeholder="请输入姓名" required><br>
-                <label style="color: mintcream">联系方式</label>
-                <input type="text" name="phoneNumber" id="phone-number" class="form-control" placeholder="请输入电话号码"
-                       required autofocus onkeyup="value=value.replace(/[^(\d)]/g,'')" >
-                <span id="ts"></span>
-                <br>
 
-                <button type="submit" class="btn btn-primary" id="btn-reg">提交</button>
 
-            </form>
 
-        </div>
-    </div>
-    <div class="col-md-4">
-    </div>
+<div id="content">
+    <form class="form-signin" action="forechangeInfo" name="reg" >
+        <lable for="successfulInput" style="color: mintcream">用户名</lable>
+        <input type="text" name="name" value="${user.name}" id="successfulInput" class="form-control">
+        <br><br>
+        <lable for="successfulInput" style="color: mintcream">电话</lable>
+        <input type="text" name="phoneNumber" value="${user.phoneNumber}" id="successfulInput" class="form-control">
+        <br><br>
+        <input type="hidden" name="id" value="${user.id}">
+        <button type="submit" class="btn btn-primary" id="btn-reg">提交</button>
+    </form>
 </div>
+
 
 
 
@@ -246,46 +243,6 @@
 </script>
 
 
-
-<div id="right" style="color: mintcream">
-    <br><br>
-    <h class="tab-pane__category yel_line">协议（必读）</h>
-    <p class="tab-pane__text">请留下真实的姓名<br>
-        尊重网上道德，遵守中华人民共和国的各项有关法律法规<br>
-        承担一切因您的行为而直接或间接导致的民事或刑事法律责任<br>
-        本站管理人员有权保留或删除其管辖留言中的任意内容<br>
-        在此留言即表明您已经阅读并接受上述条款 </p>
-</div>
-
-<div id="content">
-
-    <!--<form border="5" th:each="m: ${message_list} " action="/message/messageList}" th:text="${m.content}">-->
-    <!--</form>-->
-
-    <div id="bottom">
-        <div class="panel-body" >
-            <div class="table-responsive">
-                <table class="table table-striped table-bordered table-hover" id="dataTables-categoris">
-                    <thead>
-                    <tr>
-                        <th style="color: mintcream">留言人</th>
-                        <th  style="color: mintcream">留言内容</th>
-                        <th  style="color: mintcream">发布时间</th>
-                    </tr>
-                    </thead>
-                    <tbody id="tbody-categoris" style="background-color: mintcream">
-                    <tr th:each="m: ${message_list}">
-                        <td th:text="${m.userName}"></td>
-                        <td th:text="${m.content}"></td>
-                        <td th:text="${m.time}"></td>
-
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</div>
 
 <!-- Footer -->
 <footer class="footer slate_gray">
@@ -321,9 +278,9 @@
 </footer>
 <!-- END Footer -->
 <!-- All JavaScript libraries -->
-<script src="../static/js/jquery.min.js" th:src="@{~/js/jquery.min.js}"></script>
-<script src="../static/js/bootstrap.min.js" th:src="@{~/js/bootstrap.min.js}"></script>
+<script src="static/js/jquery.min.js" th:src="@{~/js/jquery.min.js}"></script>
+<script src="static/js/bootstrap.min.js" th:src="@{~/js/bootstrap.min.js}"></script>
 <!-- Custom JavaScript -->
-<script src="../static/js/main.js" th:src="@{~/js/main.js}"></script>
+<script src="static/js/main.js" th:src="@{~/js/main.js}"></script>
 </body>
 </html>

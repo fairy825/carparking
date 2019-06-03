@@ -87,17 +87,7 @@
                         </li>
                         <li>
                             <span class="wsmenu-click"></span>
-                            <a href="foreparking">场馆
-                                <span class="arrow"></span>
-                            </a>
-                            <ul class="wsmenu-submenu">
-                                <li>
-                                    <a href="http://localhost:63342/venue_management/templates/venueIntroduction.html?_ijt=4evhh60p8p0htck9hjb86bqlsgl">场馆介绍</a>
-                                </li>
-                                <li>
-                                    <a href="http://localhost:8080/venue/venueList">场馆预约</a>
-                                </li>
-                            </ul>
+                            <a href="foredistrict">场馆</a>
                         </li>
                         <li>
                             <span class="wsmenu-click"></span>
@@ -105,17 +95,17 @@
                         </li>
                         <li>
                             <span class="wsmenu-click"></span>
-                                <a href="@{/user/look(id=${u.id})}">个人中心
+                                <a href="#nowhere">个人中心
                                     <span class="arrow"></span>
                                 </a>
 
                             <ul class="wsmenu-submenu">
                                 <li>
-                                    <a href="forebought"  >订单查看</a>
+                                    <a href="forebought">订单查看</a>
 
                                 </li>
                                 <li>
-                                    <a th:each="u: ${user}" th:href="@{/user/look(id=${u.id})}">修改信息</a>
+                                    <a href="foreuser">修改信息</a>
                                 </li>
 
                             </ul>
@@ -123,7 +113,7 @@
                         <li >
                             <div align="right" style="position: relative;margin-left: 19cm;margin-right: -9cm">
                             <span class="wsmenu-click"></span>
-                            <a href="http://localhost:63342/venue_management/templates/last.html?_ijt=ilgc7hee5jt34ip27s5v95sk32" style="color: #0d6aad;font-family: 'Courier New', Courier, monospace;font-size: medium">注销</a>
+                            <a href="forelogout" style="color: #0d6aad;font-family: 'Courier New', Courier, monospace;font-size: medium">注销</a>
                             </div>
                         </li>
 

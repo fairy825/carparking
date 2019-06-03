@@ -33,6 +33,7 @@ public class ForeServlet extends BaseForeServlet {
 		  int id = Integer.parseInt(request.getParameter("id"));
 		  List<News> ns= new NewsDAO().list();
 		  News n = newsDAO.get(id);
+
 		  request.setAttribute("ns", ns);
 		  request.setAttribute("nn", n);
 		  return "news.jsp";
@@ -78,6 +79,8 @@ public class ForeServlet extends BaseForeServlet {
 	        	request.setAttribute("msg", "账号密码错误");
 	            return "login.jsp"; 	
 	        }
+        	request.setAttribute("msg", "");
+
 			request.getSession().setAttribute("user", user);
 			return "@forehome";
 	}  
@@ -99,7 +102,10 @@ public class ForeServlet extends BaseForeServlet {
 }  
 	public String district(HttpServletRequest request, HttpServletResponse response, Page page) {
      
-	    List<District> ds = districtDAO.list();
+	    List<District> ds = districtDAO.list(page.getStart(),page.getCount());
+		  int total = districtDAO.getTotal();
+			page.setTotal(total);
+			request.setAttribute("page", page);
 	    request.setAttribute("ds", ds);
 	    return "district.jsp";   
 	} 
@@ -107,9 +113,13 @@ public class ForeServlet extends BaseForeServlet {
 	    int did = Integer.parseInt(request.getParameter("did"));
 	    District d = districtDAO.get(did);
         parkingDAO.fill(d);
-	    List<Parking> ps = d.getParkings();
+	    List<Parking> ps = parkingDAO.list(did, page.getStart(), page.getCount());
         for (Parking p : ps) 
             parkingDAO.setFirstParkingImage(p);
+        int total = parkingDAO.getTotal(did);
+		page.setTotal(total);
+		page.setParam("&did="+did);
+		request.setAttribute("page", page);
 	    request.setAttribute("ps", ps);
 	    return "parkingsInDistrict.jsp";   
 	} 
@@ -122,11 +132,17 @@ public class ForeServlet extends BaseForeServlet {
 	    p.setParkingSingleImages(parkingSingleImages);
 	    p.setParkingDetailImages(parkingDetailImages);
 	     	 
-	    List<Message> messages = messageDAO.list(p.getId());
+	    List<Message> messages = messageDAO.list(p.getId(),page.getStart(),page.getCount());
 	    messageDAO.fill(p);
 	    timeSlotDAO.fill(p);
+	    System.out.println("beforeset");
 	    parkingDAO.setSaleAndReviewNumber(p);
-	 
+	    System.out.println("afterset");
+
+		  int total = messageDAO.getTotal(pid);
+			page.setTotal(total);
+			page.setParam("&pid="+pid);
+			request.setAttribute("page", page);
 	    request.setAttribute("ms", messages);
 	    request.setAttribute("p", p);
 	    return "parking.jsp";   
@@ -204,10 +220,13 @@ public class ForeServlet extends BaseForeServlet {
 	 public String bought(HttpServletRequest request, HttpServletResponse response, Page page) {
 		    User user =(User) request.getSession().getAttribute("user");
 		    if(user == null) return "login.jsp";
-		    List<Booking> bs= bookingDAO.list(user.getId(),BookingDAO.delete);
+		    List<Booking> bs= bookingDAO.list(user.getId(),BookingDAO.delete,page.getStart(),page.getCount());
 		     
 		    //orderItemDAO.fill(os);
 		     System.out.println("in bought1");
+		     int total = bookingDAO.getTotal(user.getId());
+				page.setTotal(total);
+				request.setAttribute("page", page);
 		    request.setAttribute("bs", bs);
 
 		    return "bought.jsp";       
@@ -402,12 +421,62 @@ public class ForeServlet extends BaseForeServlet {
 		    int bid = Integer.parseInt(request.getParameter("bid"));
 		    Booking b = bookingDAO.get(bid);
 		    Parking p = b.getParking();
-		    List<Message> ms = messageDAO.list(p.getId());
+		    List<Message> ms = messageDAO.list(p.getId(),page.getStart(),page.getCount());
 		    parkingDAO.setSaleAndReviewNumber(p);
+		   
+			  int total = messageDAO.getTotal(p.getId());
+				page.setTotal(total);
+				page.setParam("bid="+bid+"&showonly=true");
+				request.setAttribute("page", page);
 		    request.setAttribute("p", p);
 		    request.setAttribute("b", b);
 		    request.setAttribute("ms", ms);
 		    return "review.jsp";       
+	 }	 
+	 public String user(HttpServletRequest request, HttpServletResponse response, Page page) {
+		    User user =(User) request.getSession().getAttribute("user");
+		  
+		    request.setAttribute("user", user);
+		    return "user.jsp";       
+	 }
+	 public String changeInfo(HttpServletRequest request, HttpServletResponse response, Page page) {
+		    int id = Integer.parseInt(request.getParameter("id"));
+		    String name = request.getParameter("name");
+		    String phoneNumber = request.getParameter("phoneNumber");
+		    User user =  userDAO.get(id);
+		    user.setName(name);
+		    user.setPhoneNumber(phoneNumber);
+		    userDAO.update(user);
+		    request.setAttribute("user", user);
+		    return "user.jsp";       
+	 }	
+	 public String password(HttpServletRequest request, HttpServletResponse response, Page page) {
+		    int id = Integer.parseInt(request.getParameter("id"));
+		    User user =  userDAO.get(id);
+			    request.setAttribute("user", user);
+
+		    return "userPassword.jsp"; 
+	 }
+	 public String changePassword(HttpServletRequest request, HttpServletResponse response, Page page) {
+		    int id = Integer.parseInt(request.getParameter("id"));
+		    User user =  userDAO.get(id);
+
+		    String name = user.getName();
+		    String originalPassword = request.getParameter("originalPassword");
+		    String newPassword = request.getParameter("newPassword");
+		    if(userDAO.get(name, originalPassword)==null) {
+		    	request.setAttribute("msg", "密码错误"); 
+		    }
+		    else if(newPassword!="") {
+			    user.setPassword(newPassword);
+			    userDAO.update(user);
+		    	request.setAttribute("msg", "修改密码成功");
+			    request.setAttribute("user", user);
+		    }     
+		    else
+	    	request.setAttribute("msg", "请输入新密码"); 
+
+		    return "userPassword.jsp"; 
 	 }
 
 	  public String doreview(HttpServletRequest request, HttpServletResponse response, Page page) {

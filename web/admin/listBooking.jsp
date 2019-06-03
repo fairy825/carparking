@@ -48,8 +48,8 @@ $(function(){
 						<td><fmt:formatDate value="${b.createDate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 						<td><fmt:formatDate value="${b.payDate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 						<td><fmt:formatDate value="${b.arriveDate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-						<td><fmt:formatDate value="${b.startDate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-						<td><fmt:formatDate value="${b.finishDate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+						<td>${b.timeSlot.beginTime}:00</td>
+						<td>${b.timeSlot.beginTime+1}:00</td>
 						<td>${b.stateDesc}</td>
 						<td><a deleteLink="true" href="admin_booking_delete?id=${b.id}"><span class=" 	glyphicon glyphicon-trash"></span></a></td>
 							

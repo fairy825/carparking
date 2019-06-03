@@ -293,6 +293,8 @@ public class ParkingDAO {
 //        int saleCount = new OrderItemDAO().getSaleCount(p.getId());
 //        p.setSaleCount(saleCount);   
         int reviewCount = new MessageDAO().getTotal(p.getId());
+        System.out.println("reviewCount");
+        System.out.println(reviewCount);
         p.setReviewCount(reviewCount);
         
     }
