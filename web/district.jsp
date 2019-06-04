@@ -84,6 +84,12 @@
 <!--                 </div></a> -->
 <!--             </div> -->
 <!--         </div> -->
+
+    
+    	<div class="pageDiv">
+		<%@include file="include/admin/adminPage.jsp" %>
+	</div>
+	
     </div>
 </div>
 
