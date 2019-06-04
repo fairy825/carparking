@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" isELIgnored="false"%>
-<%@include file="include/header.jsp"%>
+<%--<%@include file="include/header.jsp"%>--%>
 <html>
 <head>
     <meta charset="utf-8">
@@ -23,40 +23,40 @@
 </head>
 <script>
 $(function(){
-     
+
     <c:if test="${!empty msg}">
     $("span.errorMessage").html("${msg}");
-    $("div.registerErrorMessageDiv").css("visibility","visible");      
+    $("div.registerErrorMessageDiv").css("visibility","visible");
     </c:if>
-     
+
 })
 </script>
 <body>
 
-<nav>
-    <div class="logo">
-        <a href="first-page.jsp">场馆<em>预约</em></a>
-    </div>
-    <div class="menu-icon">
-        <span></span>
-    </div>
-</nav>
+<%--<nav>--%>
+    <%--<div class="logo">--%>
+        <%--<a href="first-page.jsp">场馆<em>预约</em></a>--%>
+    <%--</div>--%>
+    <%--<div class="menu-icon">--%>
+        <%--<span></span>--%>
+    <%--</div>--%>
+<%--</nav>--%>
 
 <div id="video-container">
     <div class="video-overlay"></div>
     <div class="video-content">
-    
+
         <div class="inner">
             <center>
-            
+
                 <div  style="text-align: left">
-                
+
                     <form class="form-signin" method="get" action="forelogin">
                         <br><br>
                                   <div class="registerErrorMessageDiv" style="width:200px">
-        <div class="alert alert-danger" role="alert">
-            <span class="errorMessage"></span>
-        </div>       
+        <%--<div class="alert alert-danger" role="alert">--%>
+            <%--<span class="errorMessage"></span>--%>
+        <%--</div>--%>
     </div>
                         <br>
                         <label style="color: mintcream">用户名</label>
@@ -79,7 +79,7 @@ $(function(){
                         </div>
                         <button type="submit" class="btn btn-primary" id="btn-login">登录</button>
                         <a href="register.jsp" class="btn btn-default" style="color: #008ab8">注册</a>
-              
+
                     </form>
                 </div>
             </center>
@@ -91,55 +91,55 @@ $(function(){
 </div>
 
 
-<div class="full-screen-portfolio" id="portfolio">
-    <div class="container-fluid">
-        <div class="col-md-4 col-sm-6">
-            <div class="portfolio-item">
-                <a href="static/img/big_portfolio_item_4.png" data-lightbox="image-1" th:href="@{~/img/big_portfolio_item_4.png}"><div class="thumb">
-                    <div class="hover-effect">
-                        <div class="hover-content">
-                            <h1>Swimming<em>  pool</em></h1>
-                            <p>Awesome Place Goes Here</p>
-                        </div>
-                    </div>
-                    <div class="image">
-                        <img src="static/img/portfolio_item_5.png" th:src="@{~/img/portfolio_item_5.png}">
-                    </div>
-                </div></a>
-            </div>
-        </div>
-        <div class="col-md-4 col-sm-6">
-            <div class="portfolio-item">
-                <a href="static/img/big_portfolio_item_2.png" data-lightbox="image-1" th:href="@{~/img/big_portfolio_item_2.png}"><div class="thumb">
-                    <div class="hover-effect">
-                        <div class="hover-content">
-                            <h1>Indoor<em>  climbing</em></h1>
-                            <p>Awesome Place Goes Here</p>
-                        </div>
-                    </div>
-                    <div class="image">
-                        <img src="static/img/portfolio_item_1.png" th:src="@{~/img/portfolio_item_1.png}">
-                    </div>
-                </div></a>
-            </div>
-        </div>
-        <div class="col-md-4 col-sm-6">
-            <div class="portfolio-item">
-                <a href="../static/img/big_portfolio_item_3.png" data-lightbox="image-1" th:href="@{~/img/big_portfolio_item_3.png}"><div class="thumb">
-                    <div class="hover-effect">
-                        <div class="hover-content">
-                            <h1>Yoga<em>  club</em></h1>
-                            <p>Awesome Place Goes Here</p>
-                        </div>
-                    </div>
-                    <div class="image">
-                        <img src="static/img/portfolio_item_7.png" th:src="@{~/img/portfolio_item_7.png}">
-                    </div>
-                </div></a>
-            </div>
-        </div>
-    </div>
-</div>
+<%--<div class="full-screen-portfolio" id="portfolio">--%>
+    <%--<div class="container-fluid">--%>
+        <%--<div class="col-md-4 col-sm-6">--%>
+            <%--<div class="portfolio-item">--%>
+                <%--<a href="static/img/big_portfolio_item_4.png" data-lightbox="image-1" th:href="@{~/img/big_portfolio_item_4.png}"><div class="thumb">--%>
+                    <%--<div class="hover-effect">--%>
+                        <%--<div class="hover-content">--%>
+                            <%--<h1>Swimming<em>  pool</em></h1>--%>
+                            <%--<p>Awesome Place Goes Here</p>--%>
+                        <%--</div>--%>
+                    <%--</div>--%>
+                    <%--<div class="image">--%>
+                        <%--<img src="static/img/portfolio_item_5.png" th:src="@{~/img/portfolio_item_5.png}">--%>
+                    <%--</div>--%>
+                <%--</div></a>--%>
+            <%--</div>--%>
+        <%--</div>--%>
+        <%--<div class="col-md-4 col-sm-6">--%>
+            <%--<div class="portfolio-item">--%>
+                <%--<a href="static/img/big_portfolio_item_2.png" data-lightbox="image-1" th:href="@{~/img/big_portfolio_item_2.png}"><div class="thumb">--%>
+                    <%--<div class="hover-effect">--%>
+                        <%--<div class="hover-content">--%>
+                            <%--<h1>Indoor<em>  climbing</em></h1>--%>
+                            <%--<p>Awesome Place Goes Here</p>--%>
+                        <%--</div>--%>
+                    <%--</div>--%>
+                    <%--<div class="image">--%>
+                        <%--<img src="static/img/portfolio_item_1.png" th:src="@{~/img/portfolio_item_1.png}">--%>
+                    <%--</div>--%>
+                <%--</div></a>--%>
+            <%--</div>--%>
+        <%--</div>--%>
+        <%--<div class="col-md-4 col-sm-6">--%>
+            <%--<div class="portfolio-item">--%>
+                <%--<a href="../static/img/big_portfolio_item_3.png" data-lightbox="image-1" th:href="@{~/img/big_portfolio_item_3.png}"><div class="thumb">--%>
+                    <%--<div class="hover-effect">--%>
+                        <%--<div class="hover-content">--%>
+                            <%--<h1>Yoga<em>  club</em></h1>--%>
+                            <%--<p>Awesome Place Goes Here</p>--%>
+                        <%--</div>--%>
+                    <%--</div>--%>
+                    <%--<div class="image">--%>
+                        <%--<img src="static/img/portfolio_item_7.png" th:src="@{~/img/portfolio_item_7.png}">--%>
+                    <%--</div>--%>
+                <%--</div></a>--%>
+            <%--</div>--%>
+        <%--</div>--%>
+    <%--</div>--%>
+<%--</div>--%>
 
 
 <footer>
