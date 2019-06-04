@@ -82,6 +82,7 @@ $(function(){
 <!-- Header -->
     <%@include file="include/header.jsp" %>
 
+<<<<<<< HEAD
 <header id="header" class="header">
     <div class="header__top">
         <div class="container">
@@ -244,6 +245,8 @@ $(function(){
     <!-- /container-->
 </section>
 
+=======
+>>>>>>> 29a86d6ace068bbc63ce33e424fd4299b9d3d58e
 <!-- /top news -->
 <section class="wrap wrap_gray">
     <div class="container">

@@ -28,13 +28,13 @@ $("button.deleteOrderLink").click(function(){
     deleteOrder = false;
     $("#deleteConfirmModal").modal("show");
 });
- 
+
 $("button.deleteConfirmButton").click(function(){
     deleteOrder = true;
     $("#deleteConfirmModal").modal('hide');
 
 });
- 
+
 $('#deleteConfirmModal').on('hidden.bs.modal', function (e) {
     if(deleteOrder){
         var page="foredeleteBooking";
@@ -51,7 +51,7 @@ $('#deleteConfirmModal').on('hidden.bs.modal', function (e) {
                     }
                 }
             );
-         
+
     }
 });
 
@@ -76,115 +76,7 @@ $("button.orderListItemArrive").click(function(){
 </script>
 <body>
 <!-- Header -->
-<header id="header" class="header">
-    <div class="header__top">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-offset-2 col-md-offset-5 col-sm-6 col-md-4 hidden-xs">
-                    <div class="col-xs-4 col-sm-5">
-                        <div class="weather">
-
-
-                            <div class="weather__city__list">
-                                <ul>
-                                    <li class="active">
-                                        <a href="#">Swimming Pool</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Climbing</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Yoga</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-6 col-sm-7">
-                    <div class="exchange" style="text-align: left">
-                        <a class="tab-pane__title"  style="overflow: hidden">Welcome To Venue Management:</a>
-                        <a class="tab-pane__title" href="./" th:each="u:${user}" th:text="${u.name}" ></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    </div>
-    <div class="wsmenucontent overlapblackbg"></div>
-    <div class="wsmenuexpandermain slideRight">
-        <a id="navToggle" class="animated-arrow slideLeft">
-            <span></span>
-        </a>
-    </div>
-    <div class="header_down">
-        <div class="container">
-            <div class="wrapper clearfix bigmegamenu">
-                <!--Main Menu HTML Code-->
-                <nav class="wsmenu slideLeft clearfix">
-                    <ul class="mobile-sub wsmenu-list">
-                        <li class="visible-xs">
-                            <form class="navbar-form mob_search" role="search">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Search">
-                                </div>
-                                <button type="submit" class="btn btn-search">
-                                    <i class="icon-search"></i>
-                                </button>
-                            </form>
-                        </li>
-
-                        <li class="active">
-                            <span class="wsmenu-click"></span>
-                            <a href="index.html">首页</a>
-                        </li>
-                        <li>
-                            <span class="wsmenu-click"></span>
-                            <a href="">场馆
-                                <span class="arrow"></span>
-                            </a>
-                            <ul class="wsmenu-submenu">
-                                <li>
-                                    <a href="http://localhost:63342/venue_management/templates/venueIntroduction.html?_ijt=4evhh60p8p0htck9hjb86bqlsgl">场馆介绍</a>
-                                </li>
-                                <li>
-                                    <a href="http://localhost:8080/venue/venueList">场馆预约</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <span class="wsmenu-click"></span>
-                            <a href="http://localhost:8080/news">新闻</a>
-                        </li>
-                        <li>
-                            <span class="wsmenu-click"></span>
-                            <a href="http://localhost:8080/message/messageList">留言</a>
-                        </li>
-                        <li>
-                            <span class="wsmenu-click"></span>
-                            <a  >个人中心
-                                <span class="arrow"></span>
-                            </a>
-
-                            <ul class="wsmenu-submenu">
-                                <li>
-                                    <a href="http://localhost:8080/booking/look?id=1"  >订单查看</a>
-
-                                </li>
-                                <li>
-                                    <a href="http://localhost:8080/user/look?id=1">修改信息</a>
-                                </li>
-
-                            </ul>
-                        </li>
-
-                    </ul>
-                </nav>
-                <!--Menu HTML Code-->
-            </div>
-        </div>
-    </div>
-</header>
+<%@include file="include/header.jsp" %>
 <!-- END header -->
 <!-- header slider -->
 
@@ -206,17 +98,17 @@ $("button.orderListItemArrive").click(function(){
         line-height:30px;
 
         height:500px;
-        width:300px;
+        width:200px;
         float:left;
         padding:5px;
         font-size: 20px;
     }
     #section {
         position: relative;
-        width:600px;
+        width:800px;
         float: left;
         padding:10px;
-        margin-left: 2cm;
+        margin-left: 2.5cm;
     }
     #bottom {
         position: relative;
@@ -259,14 +151,15 @@ $("button.orderListItemArrive").click(function(){
 </style>
 <div id="register_div" class="col-md-2" style="background-color:#7B7B7B">
     <div id="left">
-        <h class="form-signin-heading" style="color: mintcream">个人中心</h>
+        <%--<h class="form-signin-heading" style="color: mintcream">个人中心</h>--%>
 
 
     </div>
 </div>
+<h5 style="color: black;margin-bottom: 30px;margin-left: 310px;margin-top: 25px;">您的位置：个人中心>>我的订单</h5>
 <div id="section">
 
-    <h2 style="color: mintcream">您的位置：个人中心>>我的订单</h2>
+
 
         <div class="row">
                                 <div class="col-md-12 col-sm-12 col-xs-12">
@@ -279,28 +172,28 @@ $("button.orderListItemArrive").click(function(){
                                                 <table class="table table-striped table-bordered table-hover" id="dataTables-categoris">
                                                     <thead>
                                                     <tr>
-                                                        <th>预约停车场</th>                                                      
-                                                        <th>预约日期</th>
-                                                        <th>预约起始时间</th>
-                                                        <th>预约终止时间</th>
-                                                        <th>订单创建时间</th>                                                        
-                                                        <th>状态</th>
-                                                        <th>操作</th>
-                                                        <th>删除</th>
+                                                        <th style="text-align: center">预约停车场</th>
+                                                        <th style="text-align: center">预约日期</th>
+                                                        <th style="text-align: center">预约起始时间</th>
+                                                        <th style="text-align: center">预约终止时间</th>
+                                                        <th style="text-align: center">订单创建时间</th>
+                                                        <th style="text-align: center">状态</th>
+                                                        <th style="text-align: center">操作</th>
+                                                        <th style="text-align: center">删除</th>
 
                                                     </tr>
                                                     </thead>
                                                     <tbody id="tbody-categoris">
                                                     <c:forEach items="${bs}" var="b">
                                                     <tr>
-                                                        <td>${b.parking.name}</td>
+                                                        <td style="text-align: center">${b.parking.name}</td>
 <%--                                                         <td>${b.id}</td> --%>
-                                                   		<td><fmt:formatDate value="${b.timeSlot.bookingDate}" pattern="yyyy-MM-dd"/></td>
-                                             
-                                                        <td>${b.timeSlot.beginTime}:00</td>
-                                                        <td>${b.timeSlot.beginTime+1}:00</td>
-				                                        <td><fmt:formatDate value="${b.createDate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-                                                        <td>${b.stateDesc}</td>
+                                                   		<td style="text-align: center"><fmt:formatDate value="${b.timeSlot.bookingDate}" pattern="yyyy-MM-dd"/></td>
+
+                                                        <td style="text-align: center">${b.timeSlot.beginTime}:00</td>
+                                                        <td style="text-align: center">${b.timeSlot.beginTime+1}:00</td>
+				                                        <td style="text-align: center"><fmt:formatDate value="${b.createDate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+                                                        <td style="text-align: center">${b.stateDesc}</td>
                              <td valign="top" class="orderListItemButtonTD orderItemOrderInfoPartTD" width="100px">
                                 <c:if test="${b.state=='waitArrive'}">
 <%--                                     <a href="forebookingArrive?bid=${b.id}"> --%>
@@ -310,15 +203,15 @@ $("button.orderListItemArrive").click(function(){
                                 <c:if test="${b.state=='waitPay'}">
                                     <a href="forepay?bid=${b.id}&total=${b.parking.price}">
                                         <button class="orderListItemConfirm">付款</button>
-                                    </a>                             
+                                    </a>
                                 </c:if>
-                                 
+
                                 <c:if test="${b.state=='waitReview' }">
                                     <a href="forereview?bid=${b.id}">
                                         <button  class=" btn btn-primary orderListItemReview">留言</button>
                                     </a>
                                 </c:if>
-                            </td>     
+                            </td>
                                                         <td class="orderItemDeleteTD">
                                                         <button class="deleteOrderLink" bid="${b.id}" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
                                                             <span  class="orderListItemDelete glyphicon glyphicon-trash"></span></button>
@@ -326,7 +219,7 @@ $("button.orderListItemArrive").click(function(){
 <!--                                                            <span  class="orderListItemDelete glyphicon glyphicon-trash"></span> -->
 <!--                                                           </a> -->
                                                         </td>
-                                                                
+
                                                     </tr>
                                                     </c:forEach>
                                                     </tbody>
@@ -357,7 +250,7 @@ $("button.orderListItemArrive").click(function(){
 <div class="modal fade" id="deleteConfirmModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 <div class="modal-dialog">
         <div class="modal-content">
-          
+
           <div class="modal-body">
             <p>确认删除？</p>
           </div>
@@ -368,7 +261,7 @@ $("button.orderListItemArrive").click(function(){
         </div><!-- /.modal-content -->
       </div><!-- /.modal-dialog -->
 </div>
- 
+
 <div style="height:200px"></div>
 
 <%@include file="include/footer.jsp" %>

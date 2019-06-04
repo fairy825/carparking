@@ -29,6 +29,7 @@
 <body>
 <!-- Header -->
     <%@include file="include/header.jsp" %>
+<<<<<<< HEAD
 
 <header id="header" class="header">
     <div class="header__top">
@@ -175,6 +176,8 @@
         </div>
     </div>
 </header>
+=======
+>>>>>>> 29a86d6ace068bbc63ce33e424fd4299b9d3d58e
 <!-- END header -->
 <!-- header slider -->
 <section>
