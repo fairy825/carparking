@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import carparking.bean.*;
+import carparking.dao.DistrictDAO;
 import carparking.util.ImageUtil;
 import carparking.util.Page;
 
@@ -57,14 +58,30 @@ public class DistrictServlet extends BaseBackServlet {
 	}
 
 	public String list(HttpServletRequest request, HttpServletResponse response, Page page) {
-		List<District> ds = districtDAO.list(page.getStart(),page.getCount());
-		
+//		int n = Integer.parseInt(request.getParameter("n"));
+//		if(n!=0) {
+//			page.setTotal(n);
+//			List<District> ds = request.getParameter("ds");
+//		}
+//		else {
+			List<District> ds = districtDAO.list(page.getStart(),page.getCount());	
 		int total = districtDAO.getTotal();
 		page.setTotal(total);
-		
+//		}
 		request.setAttribute("ds", ds);
 		request.setAttribute("page", page);
 		
 		return "admin/listDistrict.jsp";
 	}
+	public String search(HttpServletRequest request, HttpServletResponse response, Page page){
+	    String keyword = request.getParameter("keyword");
+	    List<District> ds= new DistrictDAO().search(keyword,0,20);
+	    int num = ds.size();
+//	    System.out.println(ds);
+	    page.setTotal(num);
+		request.setAttribute("page", page);
+	    request.setAttribute("ds",ds);
+//	    request.setAttribute("num",num);
+	    return "admin/listDistrict.jsp";
+	}  
 }

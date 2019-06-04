@@ -257,13 +257,34 @@ public class ForeServlet extends BaseForeServlet {
 		    new BookingDAO().update(b);
 		    return "@forebought";    
      }
-	 public String bought(HttpServletRequest request, HttpServletResponse response, Page page) {
+	 @SuppressWarnings("deprecation")
+	public String bought(HttpServletRequest request, HttpServletResponse response, Page page) {
 		    User user =(User) request.getSession().getAttribute("user");
 		    if(user == null) return "login.jsp";
+		    Date today = new Date();
 		    List<Booking> bs= bookingDAO.list(user.getId(),BookingDAO.delete,page.getStart(),page.getCount());
-		     
-		    //orderItemDAO.fill(os);
-		     System.out.println("in bought1");
+		    for(Booking b : bs) {
+		    	System.out.println("in bought");
+		    	if(b.getState().equals(BookingDAO.waitTime)) {
+		    		if(today.getHours()>=b.getTimeSlot().getBeginTime()+1)
+		    		b.setState(BookingDAO.finish);
+		    		else if(today.getHours()==b.getTimeSlot().getBeginTime())
+			    		b.setState(BookingDAO.waitArrive);
+		    	}
+		    	else if(b.getState().equals(BookingDAO.waitPay)) {
+		    		if(today.getHours()>=b.getTimeSlot().getBeginTime()+1)
+		    		b.setState(BookingDAO.finish);
+		    	}
+		    	else if(b.getState().equals(BookingDAO.waitFinish)) {
+		    		if(today.getHours()>=b.getTimeSlot().getBeginTime()+1)
+		    		b.setState(BookingDAO.waitReview);
+		    	}
+		    	else if(b.getState().equals(BookingDAO.waitArrive)) {
+		    		if(today.getHours()>=b.getTimeSlot().getBeginTime()+1)
+		    		b.setState(BookingDAO.finish);
+		    	}
+
+		    }
 		     int total = bookingDAO.getTotal(user.getId());
 				page.setTotal(total);
 				request.setAttribute("page", page);

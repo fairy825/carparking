@@ -12,21 +12,6 @@
 </head>
 <script>
 
-function checkname(){
-	var name = document.getElementById("usernameregister").value;
-    var page = "forecheckRegister";
-    $.post(
-            page,
-            {"name":name},
-            function(result){
-                if("success"!=result){
-                	  document.getElementById("tishi").innerHTML="<font color='green'>用户名已被使用</font>";
-                      document.getElementById("submit").disabled = false;
-                }
-            }
-        );     
-};
-
 
 </script>
 <style>
@@ -81,6 +66,7 @@ function checkname(){
                 </div>
 <!--               <center> -->
                 <div id="register_div" class="col-md-4" style="text-align: left">
+                
                     <form class="form-signin" id="#registerform" action="foreregister"  name="reg" >
                         <h2 class="form-signin-heading" align="center">注册</h2>
                         <div id="info">
@@ -121,6 +107,11 @@ var ph = document.getElementById("phone-number").value;
         document.getElementById("tishi").innerHTML="<font color='red' class='alert alert-danger' role='alert'>手机号必须是11位</font>";
         document.getElementById("submit").disabled = true;
     }
+    else{
+    	document.getElementById("tishi").innerHTML="";
+        document.getElementById("submit").disabled = false;
+    }
+    	
 };
 function validate() {
     var pw1 = document.getElementById("pw1").value;

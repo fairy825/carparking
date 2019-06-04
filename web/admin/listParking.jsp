@@ -33,6 +33,7 @@ $(function(){
 </script>
 
 <title>停车场管理</title>
+<%@include file="../include/searchParking.jsp"%>
 
 
 <div class="workingArea">
@@ -53,7 +54,6 @@ $(function(){
                      <th>区域</th>
                      <th>停车场租金</th>
                      <th>容量</th>
-                     <th>剩余车位</th>
                      <th width="80px">图片管理</th>
                      <th width="80px">留言管理</th>
                      <th>查看详情</th>
@@ -75,7 +75,6 @@ $(function(){
 						<td>${p.district.name}</td>
 						<td><fmt:formatNumber type="number" value="${p.price}" minFractionDigits="2"/></td>
 						<td>${p.totalSeat}</td>
-						<td>${p.seat}</td>
 					
 						<td><a href="admin_parkingImage_list?pid=${p.id}"><span
 								class="glyphicon glyphicon-picture"></span></a></td>
