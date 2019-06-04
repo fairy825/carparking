@@ -1,6 +1,7 @@
 package carparking.servlet;
 import java.util.Collections;
 
+
 import org.springframework.web.util.HtmlUtils;
 import java.util.Date;
 import java.text.SimpleDateFormat;
@@ -16,7 +17,8 @@ import carparking.bean.*;
 import carparking.dao.*;
 
 import carparking.util.Page;
-//import carparking.comparator.*;
+import carparking.comparator.*;
+
 public class ForeServlet extends BaseForeServlet {
 	public String home(HttpServletRequest request, HttpServletResponse response, Page page) {
 		List<District> ds= new DistrictDAO().list();
@@ -45,6 +47,7 @@ public class ForeServlet extends BaseForeServlet {
 			  return "news.jsp";
 	    }
 	}
+	
 	public String register(HttpServletRequest request, HttpServletResponse response, Page page) {
 		String name = request.getParameter("name");
 		String password = request.getParameter("password");
@@ -67,6 +70,17 @@ public class ForeServlet extends BaseForeServlet {
 		userDAO.add(user);
 		System.out.println("3");
 		return "login.jsp";
+	}
+	public String checkRegister(HttpServletRequest request, HttpServletResponse response, Page page) {
+		System.out.println("in checkregister");
+
+		String name = request.getParameter("name");
+		name = HtmlUtils.htmlEscape(name);
+		boolean exist = userDAO.isExist(name);
+		if(exist) {
+            return "%fail"; 	
+		}
+		return "%success";
 	}
 	
 	
@@ -114,13 +128,39 @@ public class ForeServlet extends BaseForeServlet {
 	    District d = districtDAO.get(did);
         parkingDAO.fill(d);
 	    List<Parking> ps = parkingDAO.list(did, page.getStart(), page.getCount());
-        for (Parking p : ps) 
+        parkingDAO.setSaleAndReviewNumber(ps);;
+
+	    for (Parking p : ps) {
             parkingDAO.setFirstParkingImage(p);
+        }
+	    
+	    String sort = request.getParameter("sort");
+	    if(null!=sort){
+	    switch(sort){
+	        case "review":
+	            Collections.sort(ps,new ParkingReviewComparator());
+	            break;
+	       
+	        case "seat" :
+	            Collections.sort(ps,new ParkingSeatComparator());
+	            break;
+	             
+	        case "price":
+	            Collections.sort(ps,new ParkingPriceComparator());
+	            break;
+	             
+	        case "all":
+	            Collections.sort(ps,new ParkingAllComparator());
+	            break;
+	        }
+	    }
         int total = parkingDAO.getTotal(did);
 		page.setTotal(total);
 		page.setParam("&did="+did);
 		request.setAttribute("page", page);
 	    request.setAttribute("ps", ps);
+	    request.setAttribute("d", d);
+
 	    return "parkingsInDistrict.jsp";   
 	} 
 	public String parking(HttpServletRequest request, HttpServletResponse response, Page page) {

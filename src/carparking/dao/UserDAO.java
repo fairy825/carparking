@@ -11,6 +11,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import carparking.bean.District;
+import carparking.bean.Parking;
 import carparking.bean.User;
 import carparking.util.DBUtil;
  
@@ -213,5 +215,7 @@ public class UserDAO {
         }
         return bean;
 	}
+	
+
  
 }

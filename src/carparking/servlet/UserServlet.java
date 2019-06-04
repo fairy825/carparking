@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.util.HtmlUtils;
 
 import carparking.bean.User;
+import carparking.dao.UserDAO;
 import carparking.util.Page;
 
 public class UserServlet extends BaseBackServlet {
@@ -45,4 +46,5 @@ public class UserServlet extends BaseBackServlet {
 		
 		return "admin/listUser.jsp";
 	}
+
 }

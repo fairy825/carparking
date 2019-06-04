@@ -50,6 +50,26 @@ function checkNumber(id, name){
 	
 	return true;
 }
+function checkPhone(id, name){
+	var value = $("#"+id).val();
+	if(value.length==0){
+		alert(name+ "不能为空");
+		$("#"+id)[0].focus();
+		return false;
+	}
+	if(isNaN(value)){
+		alert(name+ "必须是数字");
+		$("#"+id)[0].focus();
+		return false;
+	}
+	if(value.length!=11){
+		alert(name+ "必须是11位");
+		$("#"+id)[0].focus();
+		return false;
+	}
+	
+	return true;
+}
 function checkTimeNumber(id, name){
 	var value = $("#"+id).val();
 	if(value.length==0){

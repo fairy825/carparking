@@ -10,6 +10,25 @@
     <link href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 
 </head>
+<script>
+
+function checkname(){
+	var name = document.getElementById("usernameregister").value;
+    var page = "forecheckRegister";
+    $.post(
+            page,
+            {"name":name},
+            function(result){
+                if("success"!=result){
+                	  document.getElementById("tishi").innerHTML="<font color='green'>用户名已被使用</font>";
+                      document.getElementById("submit").disabled = false;
+                }
+            }
+        );     
+};
+
+
+</script>
 <style>
 
     .parentDiv{
@@ -60,17 +79,17 @@
                 </div>
                 <div class="col-md-4">
                 </div>
-              <center>
+<!--               <center> -->
                 <div id="register_div" class="col-md-4" style="text-align: left">
-                    <form class="form-signin" action="foreregister"  name="reg" >
+                    <form class="form-signin" id="#registerform" action="foreregister"  name="reg" >
                         <h2 class="form-signin-heading" align="center">注册</h2>
                         <div id="info">
                         </div>
-                        <label >用户名</label>
-                        <input type="text" name="name" id="username" class="form-control" placeholder="请输入用户名" required autofocus><br>
-                        <label >手机号码</label>
+                        <label >用户名</label><span>
+                        <input type="text" name="name" id="usernameregister" class="form-control userregister" placeholder="请输入用户名" required autofocus onkeyup="checkname()"><br>
+                        </span><label >手机号码</label>
                         <input type="text" name="phoneNumber" id="phone-number" class="form-control" placeholder="请输入手机号码"
-                               required autofocus onkeyup="value=value.replace(/[^(\d)]/g,'')" ><br>
+                               required autofocus onkeyup="validatephone()" ><br>
                        
                         <label >密码</label>
                         <input type="password" name="password" id="pw1"  class="form-control" placeholder="请输入密码" required><br>
@@ -78,12 +97,12 @@
                         <input type="password" name="password2" id="pw2" class="form-control" placeholder="请再次输入密码" required maxLength="16" onkeyup
                                 ="validate()"><br><span id="tishi"></span> <br>   <br>
 
-                        <button type="submit" class="btn btn-primary" id="btn-reg" disable=“disable”>注册</button>
+                        <button type="submit" id="submit" class="btn btn-primary" id="btn-reg" onclick="submit()">注册</button>
 
                         <a href="login.jsp" class="btn btn-default" id="btn-reg1">返回登录</a>
                     </form>
                 </div>
-              </center>
+<!--               </center> -->
             </div>
             <div class="col-md-4">
             </div>
@@ -91,23 +110,31 @@
 
     </div>
 </div>
-
-
 <script>
-    function validate() {
-        var pw1 = document.getElementById("pw1").value;
-        var pw2 = document.getElementById("pw2").value;
-        if(pw1 == pw2) {
-            document.getElementById("tishi").innerHTML="<font color='green'>两次密码相同</font>";
-            document.getElementById("submit").disabled = false;
-        }
-        else {
-            document.getElementById("tishi").innerHTML="<font color='red' class='alert alert-danger' role='alert'>两次密码不相同</font>";
-            document.getElementById("submit").disabled = true;
-        }
+function validatephone() {
+var ph = document.getElementById("phone-number").value;
+    if(isNaN(ph)){
+    	  document.getElementById("tishi").innerHTML="<font color='red' class='alert alert-danger' role='alert'>手机号必须是数字</font>";
+          document.getElementById("submit").disabled = true;
+	}
+    else if(ph.length!=11) {
+        document.getElementById("tishi").innerHTML="<font color='red' class='alert alert-danger' role='alert'>手机号必须是11位</font>";
+        document.getElementById("submit").disabled = true;
     }
+};
+function validate() {
+    var pw1 = document.getElementById("pw1").value;
+    var pw2 = document.getElementById("pw2").value;
+    if(pw1 == pw2) {
+        document.getElementById("tishi").innerHTML="<font color='green'>两次密码相同</font>";
+        document.getElementById("submit").disabled = false;
+    }
+    else {
+        document.getElementById("tishi").innerHTML="<font color='red' class='alert alert-danger' role='alert'>两次密码不相同</font>";
+        document.getElementById("submit").disabled = true;
+    }
+};
 </script>
-
 
 
 </body>

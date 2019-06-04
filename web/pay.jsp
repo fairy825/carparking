@@ -48,19 +48,19 @@
                                 <em></em>
                                 <em></em>
                             </div>
-                            <%--<div class="weather__city">--%>
-                                <%--<em>Swimming Pool</em>--%>
-                                <%--<div class="weather__city__list">--%>
-                                    <%--<ul>--%>
-                                        <%--<li class="active">--%>
-                                            <%--<a href="#">Indoor Climbing</a>--%>
-                                        <%--</li>--%>
-                                        <%--<li>--%>
-                                            <%--<a href="#">Yoga</a>--%>
-                                        <%--</li>--%>
-                                    <%--</ul>--%>
-                                <%--</div>--%>
-                            <%--</div>--%>
+                            <div class="weather__city">
+                                <em>Swimming Pool</em>
+                                <div class="weather__city__list">
+                                    <ul>
+                                        <li class="active">
+                                            <a href="#">Indoor Climbing</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Yoga</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -193,7 +193,7 @@
     <div class="container">
         <div class="row">
             <div class="productPageDiv">
-
+ 
     <%@include file="payPage.jsp" %>
 
 </div>

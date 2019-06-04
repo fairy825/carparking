@@ -26,6 +26,8 @@
     <![endif]-->
     <title></title>
 </head>
+        <%@include file="../include/header.jsp"%>
+
 <body>
 <!-- Header -->
 <header id="header" class="header">
@@ -194,45 +196,22 @@
                 <div class="projects__title">
                     <h2 class="block-title__h2">概览</h2>
                 </div>
-<!--                 <div class="projects__row"> -->
-<!--                     <div class="special special_big"> -->
-<!--                         <img src="../static/img/gym.jpg" height="311" width="551" alt="image" class="special__img" th:src="@{~/img/gym.jpg}"> -->
+                
+                <%@include file="include/districtPage.jsp"%>
+                   
+<%--                    <div> <c:forEach items="${ps}" var="p"> --%>
+<%--                     <a href="foreparking?pid=${p.id}"> --%>
+<!--                     <div class="special"> -->
+<%--                      <img src="img/parkingSingle/${p.firstParkingImage.id}.jpg" alt="image"height="311" width="311" alt="image"> --%>
+<!-- <!--                         <img src="../static/img/yoga1.jpg" height="311" width="551" alt="image" class="special__img" th:src="@{~/img/yoga1.jpg}"> --> -->
 <!--                         <div class="special__box"> -->
-<!--                             <h5 class="special__category yel_line">场馆</h5> -->
-<!--                             <a href="#" class="special__link">An awesome Place</a> -->
-
+<%--                             <h5 class="special__category yel_line">${p.name}</h5> --%>
+<%--                             <a class="special__link">${p.introduction}</a> --%>
 <!--                         </div> -->
 <!--                     </div> -->
-<!--                     <div class="special special_small"> -->
-<!--                         <img src="../static/img/swmming.jpg" height="311" width="285" alt="image" class="special__img" th:src="@{~/img/swmming.jpg}"> -->
-<!--                         <div class="special__box"> -->
-<!--                             <h5 class="special__category yel_line">游泳</h5> -->
-<!--                             <a href="#" class="special__link">An awesome Place</a> -->
-
-<!--                         </div> -->
+<!--                     </a> -->
+<%--                     </c:forEach> --%>
 <!--                     </div> -->
-<!--                 </div> -->
-<!--                 <div class="projects__row"> -->
-<!--                     <div class="special special_small"> -->
-<!--                         <img src="../static/img/climbing.jpg" height="311" width="285" alt="image" class="special__img" th:src="@{~/img/climbing.jpg}"> -->
-<!--                         <div class="special__box"> -->
-<!--                             <h5 class="special__category yel_line">攀岩</h5> -->
-<!--                             <a href="#" class="special__link">An awesome Place</a> -->
-
-<!--                         </div> -->
-<!--                     </div> -->
-                    <c:forEach items="${ps}" var="p">
-                    <a href="foreparking?pid=${p.id}">
-                    <div class="special">
-                     <img src="img/parkingSingle/${p.firstParkingImage.id}.jpg" alt="image"height="311" width="311" alt="image">
-<!--                         <img src="../static/img/yoga1.jpg" height="311" width="551" alt="image" class="special__img" th:src="@{~/img/yoga1.jpg}"> -->
-                        <div class="special__box">
-                            <h5 class="special__category yel_line">${p.name}</h5>
-                            <a class="special__link">${p.introduction}</a>
-                        </div>
-                    </div>
-                    </a>
-                    </c:forEach>
                 </div>
            
             </div>
