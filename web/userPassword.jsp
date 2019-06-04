@@ -24,137 +24,29 @@
 <!-- Header -->
 <script>
 $(function(){
-     
+
     <c:if test="${!empty msg}">
     $("span.errorMessage").html("${msg}");
-    $("div.registerErrorMessageDiv").css("visibility","visible");      
+    $("div.registerErrorMessageDiv").css("visibility","visible");
     </c:if>
-     
+
     $("#passForm").submit(function(){
-      
+
         if(0==$("#formerPassword").val().length){
             $("span.errorMessage").html("请输入原密码");
-            $("div.registerErrorMessageDiv").css("visibility","visible");          
+            $("div.registerErrorMessageDiv").css("visibility","visible");
             return false;
-        }      
+        }
         if(0==$("#laterPassword").val().length){
             $("span.errorMessage").html("请输入新密码");
-            $("div.registerErrorMessageDiv").css("visibility","visible");          
+            $("div.registerErrorMessageDiv").css("visibility","visible");
             return false;
-        }      
+        }
         return true;
     });
 })
 </script>
-<header id="header" class="header">
-    <div class="header__top">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-offset-2 col-md-offset-5 col-sm-6 col-md-4 hidden-xs">
-                    <div class="col-xs-4 col-sm-5">
-                        <div class="weather">
 
-
-                            <div class="weather__city__list">
-                                <ul>
-                                    <li class="active">
-                                        <a href="#">Swimming Pool</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Climbing</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Yoga</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-6 col-sm-7">
-                    <div class="exchange" style="text-align: left">
-                        <a class="tab-pane__title"  style="overflow: hidden">Welcome To Venue Management:</a>
-                        <a class="tab-pane__title" href="./" th:each="u:${user}" th:text="${u.name}" ></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    </div>
-    <div class="wsmenucontent overlapblackbg"></div>
-    <div class="wsmenuexpandermain slideRight">
-        <a id="navToggle" class="animated-arrow slideLeft">
-            <span></span>
-        </a>
-    </div>
-    <div class="header_down">
-        <div class="container">
-            <div class="wrapper clearfix bigmegamenu">
-                <!--Main Menu HTML Code-->
-                <nav class="wsmenu slideLeft clearfix">
-                    <ul class="mobile-sub wsmenu-list">
-                        <li class="visible-xs">
-                            <form class="navbar-form mob_search" role="search">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Search">
-                                </div>
-                                <button type="submit" class="btn btn-search">
-                                    <i class="icon-search"></i>
-                                </button>
-                            </form>
-                        </li>
-
-                        <li class="active">
-                            <span class="wsmenu-click"></span>
-                            <a href="http://localhost:8080/user/signIn?name=fbo&password=fb701701">首页</a>
-                        </li>
-                        <li>
-                            <span class="wsmenu-click"></span>
-                            <a href="">场馆
-                                <span class="arrow"></span>
-                            </a>
-                            <ul class="wsmenu-submenu">
-                                <li>
-                                    <a href="http://localhost:63342/venue_management/templates/venueIntroduction.html?_ijt=4evhh60p8p0htck9hjb86bqlsgl">场馆介绍</a>
-                                </li>
-                                <li>
-                                    <a href="http://localhost:8080/venue/venueList">场馆预约</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <span class="wsmenu-click"></span>
-                            <a href="http://localhost:8080/news">新闻</a>
-                        </li>
-                        <li>
-                            <span class="wsmenu-click"></span>
-                            <a href="http://localhost:8080/message/messageList">留言</a>
-                        </li>
-                        <li>
-                            <span class="wsmenu-click"></span>
-                            <a  th:each="u: ${user}" th:href="@{/user/look(id=${u.id})}">个人中心
-                                <span class="arrow"></span>
-                            </a>
-
-                            <ul class="wsmenu-submenu">
-                                <li>
-                                    <a  th:each="u: ${user}" th:href="@{/booking/look(id=${u.id})}"  >订单查看</a>
-
-                                </li>
-                                <li>
-                                    <a th:each="u: ${user}" th:href="@{/user/look(id=${u.id})}">修改信息</a>
-                                </li>
-
-                            </ul>
-                        </li>
-
-                    </ul>
-                </nav>
-                <!--Menu HTML Code-->
-            </div>
-        </div>
-    </div>
-</header>
 <!-- END header -->
 <!-- header slider -->
 
@@ -176,7 +68,7 @@ $(function(){
         line-height:30px;
 
         height:500px;
-        width:300px;
+        width:200px;
         float:left;
         padding:5px;
         font-size: 20px;
@@ -233,18 +125,19 @@ $(function(){
 </style>
 <div id="register_div" class="col-md-2" style="background-color:#7B7B7B">
     <div id="left">
-        <h class="form-signin-heading" style="color: mintcream">个人中心</h>
+        <%--<h class="form-signin-heading" style="color: mintcream">个人中心</h>--%>
     </div>
 </div>
 
 
 <div id="content">
-<div class="registerErrorMessageDiv">
-        <div class="alert alert-danger" role="alert">
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
-            <span class="errorMessage"></span>
-        </div>       
-    </div>
+<%--<div class="registerErrorMessageDiv">--%>
+        <%--<div class="alert alert-danger" role="alert">--%>
+          <%--<button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>--%>
+            <%--<span class="errorMessage"></span>--%>
+        <%--</div>--%>
+    <%--</div>--%>
+    <h5 style="color: white;margin-bottom: 30px;">您的位置：个人中心>>修改密码</h5>
     <form id="passForm" class="form-signin" action="forechangePassword" name="reg" >
         <lable  style="color: mintcream">输入原密码</lable>
         <input id="formerPass" class="formerPass" type="password" name="originalPassword" id="successfulInput" class="form-control">

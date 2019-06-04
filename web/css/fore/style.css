@@ -757,7 +757,7 @@ div.infoInimgAndInfo div.juhuasuan {
 div.infoInimgAndInfo span.juhuasuanBig {
 	font-size: 18px;
 	font-weight: bold;
-	/*font-family: ����;*/
+	/*font-family: ÃƒÆ’Ã‚Â¯Ãƒâ€šÃ‚Â¿Ãƒâ€šÃ‚Â½ÃƒÆ’Ã‚Â¯Ãƒâ€šÃ‚Â¿Ãƒâ€šÃ‚Â½ÃƒÆ’Ã‚Â¯Ãƒâ€šÃ‚Â¿Ãƒâ€šÃ‚Â½ÃƒÆ’Ã‚Â¯Ãƒâ€šÃ‚Â¿Ãƒâ€šÃ‚Â½;*/
 }
 
 div.infoInimgAndInfo span.juhuasuanTime {
@@ -919,12 +919,12 @@ div.infoInimgAndInfo span.serviceCommitmentLink a {
 
 div.productDetailDiv {
 	width: 790px;
-	margin: 40px auto;
+	margin: 40px 38px;
 }
 
 div.productMessageDiv {
 	width: 790px;
-	margin: 40px auto;
+	margin: 40px 38px;
 }
 
 div.productReviewContentPart {
@@ -934,12 +934,12 @@ div.productReviewContentPart {
 div.productDetailTopPart {
 	border: 1px solid #DFDFDF;
 	border-left-width: 0px;
-	margin-left: 40px;
+	/* margin-left: 40px; */
 }
 
 div.productReviewTopPart {
 	border: 1px solid #DFDFDF;
-	margin-left: 40px;
+	/* margin-left: 40px; */
 }
 
 div.productParamterPart {
@@ -1173,7 +1173,7 @@ img.tmallbuy {
 a.marketLink {
 	color: black;
 	font-size: 12px;
-	font-family: ����;
+	font-family: ÃƒÆ’Ã‚Â¯Ãƒâ€šÃ‚Â¿Ãƒâ€šÃ‚Â½ÃƒÆ’Ã‚Â¯Ãƒâ€šÃ‚Â¿Ãƒâ€šÃ‚Â½ÃƒÆ’Ã‚Â¯Ãƒâ€šÃ‚Â¿Ãƒâ€šÃ‚Â½ÃƒÆ’Ã‚Â¯Ãƒâ€šÃ‚Â¿Ãƒâ€šÃ‚Â½;
 	font-weight: normal;
 }
 
@@ -1181,7 +1181,7 @@ a.marketLink:hover {
 	color: black;
 	font-size: 12px;
 	text-decoration: underline;
-	font-family: ����;
+	font-family: ÃƒÆ’Ã‚Â¯Ãƒâ€šÃ‚Â¿Ãƒâ€šÃ‚Â½ÃƒÆ’Ã‚Â¯Ãƒâ€šÃ‚Â¿Ãƒâ€šÃ‚Â½ÃƒÆ’Ã‚Â¯Ãƒâ€šÃ‚Â¿Ãƒâ€šÃ‚Â½ÃƒÆ’Ã‚Â¯Ãƒâ€šÃ‚Â¿Ãƒâ€šÃ‚Â½;
 	font-weight: normal;
 }
 
@@ -1206,7 +1206,7 @@ table.productListTable {
 
 table.productListTable th {
 	color: #999999;
-	font-family: ����;
+	font-family: ÃƒÆ’Ã‚Â¯Ãƒâ€šÃ‚Â¿Ãƒâ€šÃ‚Â½ÃƒÆ’Ã‚Â¯Ãƒâ€šÃ‚Â¿Ãƒâ€šÃ‚Â½ÃƒÆ’Ã‚Â¯Ãƒâ€šÃ‚Â¿Ãƒâ€šÃ‚Â½ÃƒÆ’Ã‚Â¯Ãƒâ€šÃ‚Â¿Ãƒâ€šÃ‚Â½;
 	font-weight: normal;
 	font-size: 12px;
 	text-align: center;
@@ -1283,7 +1283,7 @@ td.orderItemFirstTD, td.orderItemLastTD {
 
 label.orderItemDeliveryLabel {
 	color: #666666;
-	font-family: ����;
+	font-family: ÃƒÆ’Ã‚Â¯Ãƒâ€šÃ‚Â¿Ãƒâ€šÃ‚Â½ÃƒÆ’Ã‚Â¯Ãƒâ€šÃ‚Â¿Ãƒâ€šÃ‚Â½ÃƒÆ’Ã‚Â¯Ãƒâ€šÃ‚Â¿Ãƒâ€šÃ‚Â½ÃƒÆ’Ã‚Â¯Ãƒâ€šÃ‚Â¿Ãƒâ€šÃ‚Â½;
 	font-size: 12px;
 	font-weight: normal;
 }
@@ -1955,7 +1955,7 @@ div.orderFinishDiv span {
 
 div.reviewDiv {
 	max-width: 1013px;
-	margin: 10px auto;
+	margin: 10px 40px;
 }
 
 div.reviewProductInfoRightDiv {
@@ -2090,19 +2090,24 @@ div.makeReviewText {
 }
 
 table.makeReviewTable {
-	margin: 20px 40px;
+	margin: 20px auto;
+	width: 800px;
 }
 
 table.makeReviewTable td {
 	border: 1px solid #E7E7E7;
 	padding: 10px;
 	background-color: white;
+	font-size: 14;
+	text-align: center;
+	/* justify-content: center; */
+	/* vertical-align: middle; */
 }
 
 table.makeReviewTable textarea {
 	border-width: 0px;
 	resize: none;
-	width: 420px;
+	width: 620px;
 	height: 120px;
 }
 
@@ -2111,19 +2116,20 @@ td.makeReviewTableFirstTD {
 }
 
 div.makeReviewButtonDiv {
-	background-color: white;
+	background-color: transparent;
 	text-align: center;
 	padding: 15px;
 }
 
 div.makeReviewButtonDiv button {
-	width: 72px;
-	height: 26px;
-	border-radius: 2px;
+	width: 172px;
+	height: 36px;
+	border-radius: 10px;
 	background-color: #C40000;
 	color: white;
 	border-width: 0px;
 	font-weight: bold;
+	font-size: 14;
 }
 
 div.registerDiv {
