@@ -109,15 +109,16 @@ $(function(){
     <%@include file="parkingMessage.jsp" %>
 
     <%@include file="parkingDetail.jsp" %>
-<%
-   Date date = new Date();
-int h = date.getHours();
-request.setAttribute("h",h);
-%>
+<%--<%--%>
+   <%--Date date = new Date();--%>
+<%--int h = date.getHours();--%>
+<%--request.setAttribute("h",h);--%>
+<%--%>--%>
 </div>
         </div>
     </div>
 </section>
+
 <section>
     <div class="wrap wrap_gray pt20" >
         <div class="container">
