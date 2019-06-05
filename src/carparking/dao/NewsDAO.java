@@ -149,5 +149,42 @@ public class NewsDAO {
         }
         return beans;
     }
+    public List<News> search(String keyword, int start, int count) {
+        List<News> beans = new ArrayList<News>();
+         System.out.println(keyword);
+        if(null==keyword||0==keyword.trim().length())
+            return beans;
+           String sql = "select * from News where title like ? limit ?,? ";
+     
+           try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql);) {
+               ps.setString(1, "%"+keyword.trim()+"%");
+               ps.setInt(2, start);
+               ps.setInt(3, count);
+     
+               ResultSet rs = ps.executeQuery();
+               System.out.println("11");
+
+               while (rs.next()) {
+                   System.out.println("in circle");
+
+            	   News bean = new News();
+                   int id = rs.getInt(1);
+                   String title = rs.getString("title");
+                   String content = rs.getString("content");
+                   Date createDate = DateUtil.t2d( rs.getTimestamp("createDate"));
+                   bean.setTitle(title);
+                   bean.setContent(content);
+                   bean.setCreateDate(createDate);
+                   bean.setId(id);
+                   beans.add(bean);
+                   System.out.println(title);
+
+               }
+           } catch (SQLException e) {
+     
+               e.printStackTrace();
+           }
+           return beans;
+   }
  
 }

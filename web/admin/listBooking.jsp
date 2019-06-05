@@ -16,6 +16,7 @@ $(function(){
 </script>
 
 <title>订单管理</title>
+<%@include file="../include/searchBooking.jsp"%>
 
 
 <div class="workingArea">

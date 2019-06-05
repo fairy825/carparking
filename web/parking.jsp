@@ -1,3 +1,5 @@
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -107,6 +109,11 @@ $(function(){
     <%@include file="parkingMessage.jsp" %>
 
     <%@include file="parkingDetail.jsp" %>
+<%
+   Date date = new Date();
+int h = date.getHours();
+request.setAttribute("h",h);
+%>
 </div>
         </div>
     </div>
@@ -118,6 +125,7 @@ $(function(){
                 <div class="col-sm-6" style="position: relative;margin-bottom: 5cm;width: 860px" >
                     <div class="block-title">
                         <h2 class="block-title__h2">开始预约</h2>
+
                     </div>
                     <div class="thumbnail thumbnail_big">
                         <div class="row">
@@ -141,18 +149,19 @@ $(function(){
                                                 </thead>
                                                 <tbody id="tbody-categoris">
                                                  <c:forEach items="${p.timeSlots}" var="t">
+                                                 <c:if test="${t.beginTime>h}">
                                                 <tr>
-<%--                                                     <td th:text="${v.date}"></td> --%>
                                                     <td>${t.beginTime}:00</td>
                                                     <td>${t.beginTime+1}:00</td>
                                                     <td>${t.seat}</td>
 
                                                     <td>
-                                                            <a class="btn btn-primary booklink" href="forecreateBooking?tid=${t.id}">
+                                                            <a <c:if test="${t.seat==0}">disabled</c:if> class="btn btn-primary booklink" href="forecreateBooking?tid=${t.id}">
                                                             <i class="fa fa-minus-square" style="color: red"></i> 预约
                                                             </a>
                                                     </td>
                                                 </tr>
+                                                </c:if>
                                                 </c:forEach>
                                                 </tbody>
                                             </table>

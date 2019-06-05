@@ -1,5 +1,7 @@
 package carparking.util;
 
+import java.io.Console;
+
 public class Page {
 	int start;
 	int count;
@@ -43,7 +45,7 @@ public class Page {
         // 假设总数是51，不能够被5整除的，那么就有11页
         else
             totalPage = total / count + 1;
-        
+        System.out.println(totalPage);
         if(0==totalPage)
         	totalPage = 1;
         return totalPage;

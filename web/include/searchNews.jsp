@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" isELIgnored="false"%>
 
-	<form action="admin_district_search" method="post" >	
+	<form action="admin_news_search" method="post" >	
 		<div class="searchDiv">
-			<input name="keyword" type="text" placeholder="请输入区域名称">
+			<input name="keyword" type="text" placeholder="请输入新闻标题">
 			<button  type="submit" class="searchButton">搜索</button>
 		</div>
 	</form>	

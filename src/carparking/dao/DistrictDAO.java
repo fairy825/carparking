@@ -134,5 +134,36 @@ public class DistrictDAO {
         }
         return beans;
     }
- 
+    public List<District> search(String keyword, int start, int count) {
+        List<District> beans = new ArrayList<District>();
+         System.out.println(keyword);
+        if(null==keyword||0==keyword.trim().length())
+            return beans;
+           String sql = "select * from District where name like ? limit ?,? ";
+     
+           try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql);) {
+               ps.setString(1, "%"+keyword.trim()+"%");
+               ps.setInt(2, start);
+               ps.setInt(3, count);
+     
+               ResultSet rs = ps.executeQuery();
+     
+               while (rs.next()) {
+                   System.out.println("0");
+
+            	   District bean = new District();
+                   int id = rs.getInt(1);
+                   String name = rs.getString(2);
+                   bean.setId(id);
+                   bean.setName(name);
+                   beans.add(bean);
+                   System.out.println(name);
+
+               }
+           } catch (SQLException e) {
+     
+               e.printStackTrace();
+           }
+           return beans;
+   }
 }

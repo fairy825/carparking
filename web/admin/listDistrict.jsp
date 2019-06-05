@@ -19,7 +19,7 @@ $(function(){
 </script>
 
 <title>区域管理</title>
-
+<%@include file="../include/search.jsp"%>
 
 <div class="workingArea">
 	<h1 class="label label-info" >区域管理</h1>

@@ -16,6 +16,7 @@ $(function(){
 </script>
 
 <title>新闻管理</title>
+<%@include file="../include/searchNews.jsp"%>
 
 
 <div class="workingArea">

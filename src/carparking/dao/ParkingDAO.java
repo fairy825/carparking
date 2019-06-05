@@ -318,8 +318,10 @@ public class ParkingDAO {
                 ps.setInt(3, count);
       
                 ResultSet rs = ps.executeQuery();
-      
+//      System.out.println("in search");
                 while (rs.next()) {
+//                    System.out.println("in circle");
+
                 	Parking bean = new Parking();
                     int id = rs.getInt(1);
                     String name = rs.getString("name");
@@ -356,4 +358,55 @@ public class ParkingDAO {
             }
             return beans;
     }
+    public List<Parking> select(String target,int fromCount, int toCount, int start, int count) {
+        List<Parking> beans = new ArrayList<Parking>();
+         
+           String sql = "select * from Parking where "+target+" between "+fromCount+" and "+toCount+" limit ?,? ";
+           System.out.println(sql);
+
+           try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql);) {
+               ps.setInt(1, start);
+               ps.setInt(2, count);
+     
+               ResultSet rs = ps.executeQuery();
+     System.out.println("in search");
+               while (rs.next()) {
+                   System.out.println("in circle");
+
+               	Parking bean = new Parking();
+                   int id = rs.getInt(1);
+                   String name = rs.getString("name");
+                   String introduction = rs.getString("introduction");
+                   float price = rs.getFloat("price");
+                   String phoneNumber = rs.getString("phoneNumber");
+                   int seat = rs.getInt("seat");
+                   int totalSeat = rs.getInt("totalSeat");
+                   int did = rs.getInt("did");
+                   String location = rs.getString("location");
+                   int startTime= rs.getInt("startTime");
+                   int endTime= rs.getInt("endTime");
+                   bean.setName(name);
+                   bean.setIntroduction(introduction);
+                   bean.setPrice(price);
+                   bean.setPhoneNumber(phoneNumber);
+                   bean.setSeat(seat);
+                   bean.setTotalSeat(totalSeat);
+                   District district = new DistrictDAO().get(did);
+                   bean.setDistrict(district);
+                   bean.setLocation(location);
+                   bean.setStartTime(startTime);
+                   bean.setEndTime(endTime);
+                   bean.setId(id);
+
+                   setFirstParkingImage(bean);
+                   setTimeSlots(bean);
+
+                   beans.add(bean);
+               }
+           } catch (SQLException e) {
+     
+               e.printStackTrace();
+           }
+           return beans;
+   }
 }

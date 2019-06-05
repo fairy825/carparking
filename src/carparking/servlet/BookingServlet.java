@@ -7,7 +7,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import carparking.bean.Booking;
+import carparking.bean.Parking;
 import carparking.dao.BookingDAO;
+import carparking.dao.ParkingDAO;
 import carparking.util.Page;
 
 public class BookingServlet extends BaseBackServlet {
@@ -43,4 +45,18 @@ public class BookingServlet extends BaseBackServlet {
 		
 		return "admin/listBooking.jsp";
 	}
+	public String search(HttpServletRequest request, HttpServletResponse response, Page page){
+	    String keyword = request.getParameter("keyword");
+	    System.out.println(keyword);
+
+	    List<Booking> bss= new BookingDAO().search(keyword,0,20);
+	    int num = bss.size();
+//	    System.out.println(ds);
+		page.setTotal(num);
+	    request.setAttribute("bs",bss);
+		request.setAttribute("page", page);
+
+//	    request.setAttribute("num",num);
+	    return "admin/listBooking.jsp";
+	}  
 }
