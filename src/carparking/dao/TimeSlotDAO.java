@@ -35,12 +35,14 @@ public class TimeSlotDAO {
         }
         return total;
     }
-    public int getTotal(Date bookingDate) {
+    public int getTotal(Date bookingDate, int pid) {
+
         int total = 0;
         try (Connection c = DBUtil.getConnection(); Statement s = c.createStatement();) {
  
-            String sql = "select count(*) from TimeSlot where bookingDate ="+bookingDate;
- 
+            String sql = "select count(*) from TimeSlot where bookingDate = '"+bookingDate+"' and pid = "+pid;
+        	
+
             ResultSet rs = s.executeQuery(sql);
             while (rs.next()) {
                 total = rs.getInt(1);
@@ -238,12 +240,8 @@ public class TimeSlotDAO {
             fill(p);
     }
     public void fill(Parking p) {
-//    	new ParkingDAO().setTimeSlots(p);
-    	System.out.println("2");
-
     	List<TimeSlot> tss=listByParking(p.getId());
-
-            p.setTimeSlots(tss);
+        p.setTimeSlots(tss);
     }
     public TimeSlot get(int id) {
     	TimeSlot bean = null;
@@ -275,46 +273,24 @@ public class TimeSlotDAO {
         }
         return bean;
     }
+    public boolean isExist(Date bookingDate) {
+    	int total = 0;
+    	 try (Connection c = DBUtil.getConnection(); Statement s = c.createStatement();) {
+    		 
+             String sql = "select count(*) from TimeSlot where bookingDate = '"+bookingDate;
   
-//    public List<TimeSlot> list(Date bookingDate) {
-//        return list(bookingDate,0, Short.MAX_VALUE);
-//    }
-// 
-//    public List<TimeSlot> list(Date bookingDate, int start, int count) {
-//        List<TimeSlot> beans = new ArrayList<TimeSlot>();
-// 
-//        String sql = "select * from TimeSlot where bookingDate = ? order by id desc limit ?,? ";
-// 
-//        try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql);) {
-//            //ps.setTimestamp(1, DateUtil.d2t(bookingDate));
-//            ps.setDate(1, new java.sql.Date(bookingDate.getTime()));
-//
-//            ps.setInt(2, start);
-//            ps.setInt(3, count);
-// 
-//            ResultSet rs = ps.executeQuery();
-// 
-//            while (rs.next()) {
-//            	TimeSlot bean = new TimeSlot();
-//                int id = rs.getInt(1);
-//                int uid = rs.getInt("uid");
-//                User user = new UserDAO().get(uid);
-//                int bid = rs.getInt("bid");
-//                Booking booking = new BookingDAO().get(bid);
-//                int beginTime = rs.getInt("beginTime");
-//                bean.setStartTime(beginTime);
-//                bean.setBookingDate(bookingDate);    
-////                bean.setUser(user);
-//                bean.setBooking(booking);
-//                bean.setId(id);
-//                beans.add(bean);
-//            }
-//        } catch (SQLException e) {
-// 
-//            e.printStackTrace();
-//        }
-//        return beans;
-//    }
+             ResultSet rs = s.executeQuery(sql);
+             while (rs.next()) {
+                 total = rs.getInt(1);
+             }
+         } catch (SQLException e) {
+  
+             e.printStackTrace();
+         }
+		return total!=0;
+
+	}
+
     public List<TimeSlot> list() {
         return list(0, Short.MAX_VALUE);
     }
@@ -334,17 +310,48 @@ public class TimeSlotDAO {
             while (rs.next()) {
             	TimeSlot bean = new TimeSlot();
                 int id = rs.getInt(1);
-                int uid = rs.getInt("uid");
-                User user = new UserDAO().get(uid);
-                int bid = rs.getInt("bid");
-                Booking booking = new BookingDAO().get(bid);
+                int pid = rs.getInt("pid");
+                Parking parking = new ParkingDAO().get(pid);
                 int beginTime = rs.getInt("beginTime");
-                bean.setBeginTime(beginTime);
+                int seat = rs.getInt("seat");
                 Date bookingDate = DateUtil.t2d( rs.getTimestamp("bookingDate"));
-//                bean.setBookingDate(bookingDate);    
-//                bean.setBooking(booking);
+                bean.setBeginTime(beginTime);
+                bean.setBookingDate(bookingDate);
+                bean.setSeat(seat);
+                bean.setParking(parking);
                 bean.setId(id);
                 beans.add(bean);
+            	
+                bean.setId(id);
+                beans.add(bean);
+            }
+        } catch (SQLException e) {
+ 
+            e.printStackTrace();
+        }
+        return beans;
+    }
+    public List<TimeSlot> list(Date bookingDate, int pid, int start, int count) {
+        List<TimeSlot> beans = new ArrayList<TimeSlot>();
+        try (Connection c = DBUtil.getConnection(); Statement s = c.createStatement();) {
+            Date today = new java.sql.Date(bookingDate.getTime());
+            String sql = "select * from TimeSlot where bookingDate = '"+today+"' and pid = "+pid+" limit "+start+","+count;        	
+    
+            ResultSet rs = s.executeQuery(sql);
+            while (rs.next()) {
+         
+            	TimeSlot bean = new TimeSlot();
+                int id = rs.getInt(1);
+                Parking parking = new ParkingDAO().get(pid);
+                int beginTime = rs.getInt("beginTime");
+                int seat = rs.getInt("seat");
+                bean.setBeginTime(beginTime);
+                bean.setBookingDate(bookingDate);
+                bean.setSeat(seat);
+                bean.setParking(parking);
+                bean.setId(id);
+                beans.add(bean);
+
             }
         } catch (SQLException e) {
  

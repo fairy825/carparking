@@ -56,6 +56,22 @@ public class BookingDAO {
         }
         return total;
     }
+	public int getTotal(int uid, String excludedStatus) {
+        int total = 0;
+        try (Connection c = DBUtil.getConnection(); Statement s = c.createStatement();) {
+ 
+            String sql = "select count(*) from Booking where uid = "+uid+" state!= "+excludedStatus;
+ 
+            ResultSet rs = s.executeQuery(sql);
+            while (rs.next()) {
+                total = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+ 
+            e.printStackTrace();
+        }
+        return total;
+    }
  
     public void add(Booking bean) {
 
@@ -255,10 +271,7 @@ System.out.println("in bookingdao:add");
     	}
     	return beans;
     }
-    public List<Booking> search(String keyword) {
-        return search(keyword,0, Short.MAX_VALUE);
-    }
-    public List<Booking> search(String keyword, int start, int count) {
+    public List<Booking> searchByUser(String keyword, int start, int count) {
         List<Booking> beans = new ArrayList<Booking>();
         int uid =0;
         if(null==keyword||0==keyword.trim().length())
@@ -289,7 +302,6 @@ System.out.println("in bookingdao:add");
       
                 ResultSet rs = ps.executeQuery();
                while (rs.next()) {
-//                   System.out.println("in circle");
 
             	   Booking bean = new Booking();
                    int id = rs.getInt("id");
@@ -301,6 +313,109 @@ System.out.println("in bookingdao:add");
                    User user = new UserDAO().get(uid);
                    int pid =rs.getInt("pid");                
                    Parking parking = new ParkingDAO().get(pid);
+                   int tid =rs.getInt("tid");                
+                   TimeSlot timeSlot = new TimeSlotDAO().get(tid);
+                   bean.setUser(user);
+                   bean.setParking(parking);
+                   bean.setState(state);
+                   bean.setCreateDate(createDate);
+                   bean.setPayDate(payDate);
+                   bean.setArriveDate(arriveDate);
+                   bean.setTimeSlot(timeSlot);
+                   bean.setId(id);
+       			beans.add(bean);
+               }
+           } catch (SQLException e) {
+     
+               e.printStackTrace();
+           }
+           return beans;
+   }
+    public List<Booking> searchByParking(String keyword, int start, int count) {
+        List<Booking> beans = new ArrayList<Booking>();
+        int pid =0;
+        if(null==keyword||0==keyword.trim().length())
+            return beans;
+           String sql = "select id from Parking where name = ?";
+
+           try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql);) {
+               ps.setString(1, keyword);
+               System.out.println(sql);
+
+               ResultSet rs = ps.executeQuery();
+     System.out.println("in search");
+               if (rs.next()) {
+                  pid = rs.getInt("id");
+                  System.out.println("pid");
+                  System.out.println(pid);
+
+               }
+           } catch (SQLException e) {
+        	     
+               e.printStackTrace();
+           }
+            sql = "select * from Booking where pid = ? limit ?,? ";
+            try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql);) {
+                ps.setInt(1, pid);
+                ps.setInt(2, start);
+                ps.setInt(3, count);
+      
+                ResultSet rs = ps.executeQuery();
+               while (rs.next()) {
+
+            	   Booking bean = new Booking();
+                   int id = rs.getInt("id");
+
+                   String state = rs.getString("state");
+                   Date createDate = DateUtil.t2d( rs.getTimestamp("createDate"));
+                   Date payDate = DateUtil.t2d( rs.getTimestamp("payDate"));
+                   Date arriveDate = DateUtil.t2d( rs.getTimestamp("arriveDate"));    
+                   int uid =rs.getInt("uid");                
+                   User user = new UserDAO().get(uid);
+                   int ppid =rs.getInt("pid");                
+                   Parking parking = new ParkingDAO().get(ppid);
+                   int tid =rs.getInt("tid");                
+                   TimeSlot timeSlot = new TimeSlotDAO().get(tid);
+                   bean.setUser(user);
+                   bean.setParking(parking);
+                   bean.setState(state);
+                   bean.setCreateDate(createDate);
+                   bean.setPayDate(payDate);
+                   bean.setArriveDate(arriveDate);
+                   bean.setTimeSlot(timeSlot);
+                   bean.setId(id);
+       			beans.add(bean);
+               }
+           } catch (SQLException e) {
+     
+               e.printStackTrace();
+           }
+           return beans;
+   }
+    public List<Booking> searchByState(String keyword, int start, int count) {
+        List<Booking> beans = new ArrayList<Booking>();
+        int pid =0;
+        if(null==keyword||0==keyword.trim().length())
+            return beans;
+           String sql = "select * from Booking where state = ? limit ?,? ";
+            try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql);) {
+                ps.setString(1, keyword);
+                ps.setInt(2, start);
+                ps.setInt(3, count);
+      
+                ResultSet rs = ps.executeQuery();
+               while (rs.next()) {
+
+            	   Booking bean = new Booking();
+                   int id = rs.getInt("id");
+                   String state = rs.getString("state");
+                   Date createDate = DateUtil.t2d( rs.getTimestamp("createDate"));
+                   Date payDate = DateUtil.t2d( rs.getTimestamp("payDate"));
+                   Date arriveDate = DateUtil.t2d( rs.getTimestamp("arriveDate"));    
+                   int uid =rs.getInt("uid");                
+                   User user = new UserDAO().get(uid);
+                   int ppid =rs.getInt("pid");                
+                   Parking parking = new ParkingDAO().get(ppid);
                    int tid =rs.getInt("tid");                
                    TimeSlot timeSlot = new TimeSlotDAO().get(tid);
                    bean.setUser(user);

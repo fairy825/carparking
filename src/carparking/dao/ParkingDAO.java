@@ -38,7 +38,7 @@ public class ParkingDAO {
   
     public void add(Parking bean) {
  
-        String sql = "insert into Parking values(null,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "insert into Parking values(null,?,?,?,?,?,?,?,?,?)";
         try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql);) {
   
             ps.setString(1, bean.getName());
@@ -46,23 +46,16 @@ public class ParkingDAO {
             ps.setFloat(3, bean.getPrice());
             ps.setString(4, bean.getPhoneNumber());
             ps.setInt(5, bean.getTotalSeat());
-            ps.setInt(6, bean.getTotalSeat());
-            ps.setInt(7, bean.getDistrict().getId());
-            ps.setString(8, bean.getLocation());
-            ps.setInt(9, bean.getStartTime());
-            ps.setInt(10, bean.getEndTime());
+            ps.setInt(6, bean.getDistrict().getId());
+            ps.setString(7, bean.getLocation());
+            ps.setInt(8, bean.getStartTime());
+            ps.setInt(9, bean.getEndTime());
             ps.execute();
-            System.out.println("0");
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
                 int id = rs.getInt(1);
-                System.out.println("in parkingdao:Add");
-
                 bean.setId(id);
                 setTimeSlots(bean);
-                System.out.println("after settimeslot");
-
-                bean.setId(id);
             }
         } catch (SQLException e) {
   
@@ -71,22 +64,19 @@ public class ParkingDAO {
     }
   
     public void update(Parking bean) {
-    	
-    	 
-        String sql = "update Parking set name= ?, introduction=?, price=?, phoneNumber=?, seat=?, totalSeat=?, did = ?, location=?,startTime=?,endTime=? where id = ?";
+        String sql = "update Parking set name= ?, introduction=?, price=?, phoneNumber=?, totalSeat=?, did = ?, location=?,startTime=?,endTime=? where id = ?";
         try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql);) {
         	  
             ps.setString(1, bean.getName());
             ps.setString(2, bean.getIntroduction());
             ps.setFloat(3, bean.getPrice());
             ps.setString(4, bean.getPhoneNumber());
-            ps.setInt(5, bean.getSeat());
-            ps.setInt(6, bean.getTotalSeat());
-            ps.setInt(7, bean.getDistrict().getId());
-            ps.setString(8, bean.getLocation());
-            ps.setInt(9, bean.getStartTime());
-            ps.setInt(10, bean.getEndTime());
-            ps.setInt(11, bean.getId());
+            ps.setInt(5, bean.getTotalSeat());
+            ps.setInt(6, bean.getDistrict().getId());
+            ps.setString(7, bean.getLocation());
+            ps.setInt(8, bean.getStartTime());
+            ps.setInt(9, bean.getEndTime());
+            ps.setInt(10, bean.getId());
 
             ps.execute();
   
@@ -124,7 +114,6 @@ public class ParkingDAO {
                 String introduction = rs.getString("introduction");
                 float price = rs.getFloat("price");
                 String phoneNumber = rs.getString("phoneNumber");
-                int seat = rs.getInt("seat");
                 int totalSeat = rs.getInt("totalSeat");
                 int did = rs.getInt("did");
                 String location = rs.getString("location");
@@ -134,7 +123,6 @@ public class ParkingDAO {
                 bean.setIntroduction(introduction);
                 bean.setPrice(price);
                 bean.setPhoneNumber(phoneNumber);
-                bean.setSeat(seat);
                 bean.setTotalSeat(totalSeat);
                 District district = new DistrictDAO().get(did);
                 bean.setDistrict(district);
@@ -143,7 +131,6 @@ public class ParkingDAO {
                 bean.setEndTime(endTime);
                 bean.setId(id);
                 setFirstParkingImage(bean);
-                //setTimeSlots(bean);
             }
   
         } catch (SQLException e) {
@@ -176,7 +163,6 @@ public class ParkingDAO {
                 String introduction = rs.getString("introduction");
                 float price = rs.getFloat("price");
                 String phoneNumber = rs.getString("phoneNumber");
-                int seat = rs.getInt("seat");
                 int totalSeat = rs.getInt("totalSeat");
                 String location = rs.getString("location");
                 int startTime= rs.getInt("startTime");
@@ -185,7 +171,6 @@ public class ParkingDAO {
                 bean.setIntroduction(introduction);
                 bean.setPrice(price);
                 bean.setPhoneNumber(phoneNumber);
-                bean.setSeat(seat);
                 bean.setTotalSeat(totalSeat);
                 bean.setDistrict(district);
                 bean.setLocation(location);
@@ -224,7 +209,6 @@ public class ParkingDAO {
                 String introduction = rs.getString("introduction");
                 float price = rs.getFloat("price");
                 String phoneNumber = rs.getString("phoneNumber");
-                int seat = rs.getInt("seat");
                 int totalSeat = rs.getInt("totalSeat");
                 int did = rs.getInt("did");
                 String location = rs.getString("location");
@@ -234,7 +218,6 @@ public class ParkingDAO {
                 bean.setIntroduction(introduction);
                 bean.setPrice(price);
                 bean.setPhoneNumber(phoneNumber);
-                bean.setSeat(seat);
                 bean.setTotalSeat(totalSeat);
                 District district = new DistrictDAO().get(did);
                 bean.setDistrict(district);
@@ -264,7 +247,6 @@ public class ParkingDAO {
     public void setTimeSlots(Parking p) {
     	System.out.println("in parkingdao:settimeslot");
     	TimeSlotDAO tsdao = new TimeSlotDAO();
-        List<TimeSlot> tss = new ArrayList<TimeSlot>();
 
         Date bookingDate = new Date();
 
@@ -278,10 +260,8 @@ public class ParkingDAO {
             bean.setSeat(seat);
             bean.setBeginTime(beginTime);
             bean.setParking(p);
-        	System.out.println("in settimeslot");
             tsdao.add(bean);
     	}
-            //p.setTimeSlots(tss);    
     }
     public void setFirstParkingImage(Parking p) {
         List<ParkingImage> pis= new ParkingImageDAO().list(p, ParkingImageDAO.type_single);
@@ -290,8 +270,6 @@ public class ParkingDAO {
     }
      
     public void setSaleAndReviewNumber(Parking p) {
-//        int saleCount = new OrderItemDAO().getSaleCount(p.getId());
-//        p.setSaleCount(saleCount);   
         int reviewCount = new MessageDAO().getTotal(p.getId());
         System.out.println("reviewCount");
         System.out.println(reviewCount);
@@ -305,7 +283,7 @@ public class ParkingDAO {
         }
     }
  
-    public List<Parking> search(String keyword, int start, int count) {
+    public List<Parking> searchByName(String keyword, int start, int count) {
          List<Parking> beans = new ArrayList<Parking>();
           
          if(null==keyword||0==keyword.trim().length())
@@ -318,9 +296,7 @@ public class ParkingDAO {
                 ps.setInt(3, count);
       
                 ResultSet rs = ps.executeQuery();
-//      System.out.println("in search");
                 while (rs.next()) {
-//                    System.out.println("in circle");
 
                 	Parking bean = new Parking();
                     int id = rs.getInt(1);
@@ -328,7 +304,6 @@ public class ParkingDAO {
                     String introduction = rs.getString("introduction");
                     float price = rs.getFloat("price");
                     String phoneNumber = rs.getString("phoneNumber");
-                    int seat = rs.getInt("seat");
                     int totalSeat = rs.getInt("totalSeat");
                     int did = rs.getInt("did");
                     String location = rs.getString("location");
@@ -338,7 +313,6 @@ public class ParkingDAO {
                     bean.setIntroduction(introduction);
                     bean.setPrice(price);
                     bean.setPhoneNumber(phoneNumber);
-                    bean.setSeat(seat);
                     bean.setTotalSeat(totalSeat);
                     District district = new DistrictDAO().get(did);
                     bean.setDistrict(district);
@@ -348,7 +322,6 @@ public class ParkingDAO {
                     bean.setId(id);
 
                     setFirstParkingImage(bean);
-                    setTimeSlots(bean);
 
                     beans.add(bean);
                 }
@@ -362,16 +335,14 @@ public class ParkingDAO {
         List<Parking> beans = new ArrayList<Parking>();
          
            String sql = "select * from Parking where "+target+" between "+fromCount+" and "+toCount+" limit ?,? ";
-           System.out.println(sql);
+           System.out.println("in select");
 
            try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql);) {
                ps.setInt(1, start);
                ps.setInt(2, count);
      
                ResultSet rs = ps.executeQuery();
-     System.out.println("in search");
                while (rs.next()) {
-                   System.out.println("in circle");
 
                	Parking bean = new Parking();
                    int id = rs.getInt(1);
@@ -379,7 +350,6 @@ public class ParkingDAO {
                    String introduction = rs.getString("introduction");
                    float price = rs.getFloat("price");
                    String phoneNumber = rs.getString("phoneNumber");
-                   int seat = rs.getInt("seat");
                    int totalSeat = rs.getInt("totalSeat");
                    int did = rs.getInt("did");
                    String location = rs.getString("location");
@@ -389,7 +359,6 @@ public class ParkingDAO {
                    bean.setIntroduction(introduction);
                    bean.setPrice(price);
                    bean.setPhoneNumber(phoneNumber);
-                   bean.setSeat(seat);
                    bean.setTotalSeat(totalSeat);
                    District district = new DistrictDAO().get(did);
                    bean.setDistrict(district);
@@ -399,7 +368,6 @@ public class ParkingDAO {
                    bean.setId(id);
 
                    setFirstParkingImage(bean);
-                   setTimeSlots(bean);
 
                    beans.add(bean);
                }

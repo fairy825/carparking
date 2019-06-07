@@ -49,10 +49,16 @@ $(function(){
      
     <table class="categorySortBarTable">
         <tr>
-            <td><input class="sortBarPrice beginPrice" type="text" placeholder="请输入"></td>
+            <td><input class="sortBarPrice beginPrice" type="text" placeholder="请输入最低价格"></td>
             <td class="grayColumn priceMiddleColumn">-</td>
-            <td><input class="sortBarPrice endPrice" type="text" placeholder="请输入"></td>
+            <td><input class="sortBarPrice endPrice" type="text" placeholder="请输入最高价格"></td>
         </tr>
+
     </table>
- 
+ <form action="foreparkingSearch" method="post" >	
+		      <div class="searchDiv">
+			    <input name="keyword" type="text" placeholder="请输入停车场名称">
+			    <button  type="submit" class="searchButton">搜索</button>
+		      </div>
+	        </form>	
 </div>

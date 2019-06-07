@@ -49,6 +49,15 @@
         <servlet-name>MessageServlet</servlet-name>
         <url-pattern>/messageServlet</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>TimeSlotServlet</servlet-name>
+        <servlet-class>carparking.servlet.TimeSlotServlet</servlet-class>
+    </servlet>
+ 
+    <servlet-mapping>
+        <servlet-name>TimeSlotServlet</servlet-name>
+        <url-pattern>/timeSlotServlet</url-pattern>
+    </servlet-mapping>
 
     <servlet>
         <servlet-name>ParkingServlet</servlet-name>

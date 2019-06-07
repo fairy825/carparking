@@ -28,9 +28,11 @@ public class ForeAuthFilter implements Filter {
 		 String[] noNeedAuthPage = new String[]{
 	                "home",
 	                "news",
+	                "adminlogin",
 	                "district",
 	                "parking",
 	                "parkinglist",
+	                "parkingSearch",
 	                "checkLogin",
 	                "register",
 	                "loginAjax",

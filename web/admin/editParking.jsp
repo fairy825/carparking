@@ -59,16 +59,12 @@ if (!checkTimeNumber("startTime", "开始营业时间"))
 					</tr>
 					<tr>
 						<td>营业时间</td>
-						<td><input name="startTime" id="startTime" class="form-control" required ></input>:00 - 
-						<input name="endTime" id="endTime" class="form-control" required >:00</input>
+						<td><input name="startTime" id="startTime" value="${p.startTime}" class="form-control" required ></input>:00 - 
+						<input name="endTime" id="endTime" class="form-control" value="${p.endTime}" required >:00</input>
 						<br>
                         </td>
 					</tr>
-					<tr>
-						<td>剩余车位</td>
-						<td><input name="seat" id="seat" value="${p.seat}" class="form-control" placeholder="请输入剩余车位数" required ></input><br>
-                        </td>
-					</tr>
+					
 					<tr>
 						<td>联系电话</td>
 						<td><input name="phoneNumber" id="phoneNumber" value="${p.phoneNumber}"  class="form-control" placeholder="请输入联系电话" required></input><br>

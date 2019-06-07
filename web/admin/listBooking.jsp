@@ -36,7 +36,6 @@ $(function(){
 					<th>停车起始时间</th>
                     <th>停车终止时间</th>
                     <th>订单状态</th>
-                    <th>删除</th>
                     
 				</tr>
 			</thead>
@@ -52,7 +51,6 @@ $(function(){
 						<td>${b.timeSlot.beginTime}:00</td>
 						<td>${b.timeSlot.beginTime+1}:00</td>
 						<td>${b.stateDesc}</td>
-						<td><a deleteLink="true" href="admin_booking_delete?id=${b.id}"><span class=" 	glyphicon glyphicon-trash"></span></a></td>
 							
 					</tr>
 				</c:forEach>

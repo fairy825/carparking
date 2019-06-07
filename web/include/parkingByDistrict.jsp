@@ -12,7 +12,7 @@
                      <img src="img/parkingSingle/${p.firstParkingImage.id}.jpg" alt="image"height="311" width="311" alt="image">
                         <div class="special__box">
                             <h5 class="special__category yel_line">
-                             ${fn:substring(p.name, 0, 50)}
+                             ${p.name}
                              </h5>
                             <a class="special__link">${p.introduction}</a>
                         </div>
@@ -24,7 +24,9 @@
                     <span class="monthDeal ">容量 <span class="productDealNumber">${p.totalSeat}</span></span>
                     <span class="productReview">评价<span class="productReviewNumber">${p.reviewCount}</span></span>
                 </div>
+                
                 </a>
+            </div>
             </div>
         </div>
     </c:forEach>

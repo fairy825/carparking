@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import carparking.bean.*;
+import carparking.dao.BookingDAO;
 import carparking.dao.DistrictDAO;
 import carparking.dao.NewsDAO;
 import carparking.util.Page;
@@ -44,9 +45,21 @@ public class NewsServlet extends BaseBackServlet {
 	}
 
 	public String list(HttpServletRequest request, HttpServletResponse response, Page page) {
-		List<News> ns = newsDAO.list(page.getStart(),page.getCount());
-		
-		int total = newsDAO.getTotal();
+		List<News> ns = null;
+		int total = 0;
+		String search = request.getParameter("search");
+
+		if(null!=search) {
+			if(search.equals("title")) {
+		      String keyword = request.getParameter("keyword");
+			  ns= new NewsDAO().search(keyword,0,20);
+    		  total = ns.size();
+		    }
+		}
+		else {
+			 ns = newsDAO.list(page.getStart(),page.getCount());
+			 total = newsDAO.getTotal();
+		}
 		page.setTotal(total);
 		
 		request.setAttribute("ns", ns);

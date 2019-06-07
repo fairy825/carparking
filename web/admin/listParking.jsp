@@ -56,6 +56,7 @@ $(function(){
                      <th>容量</th>
                      <th width="80px">图片管理</th>
                      <th width="80px">留言管理</th>
+                     <th width="80px">时段管理</th>
                      <th>查看详情</th>
 					 <th>编辑</th>
 					 <th>删除</th>
@@ -80,6 +81,9 @@ $(function(){
 								class="glyphicon glyphicon-picture"></span></a></td>
 						<td><a href="admin_message_list?pid=${p.id}"><span
 								class="glyphicon glyphicon glyphicon-text-width"></span></a></td>
+						<td><a href="admin_timeSlot_list?pid=${p.id}"><span
+								class="glyphicon glyphicon glyphicon-time"></span></a></td>
+						
 						<td><button pid=${p.id}  class="orderPageCheckOrderItems btn btn-primary btn-xs">查看详情</button></td>
 						<td><a href="admin_parking_edit?id=${p.id}"><span
 								class="glyphicon glyphicon-edit"></span></a></td>

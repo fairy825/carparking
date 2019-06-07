@@ -36,27 +36,40 @@ public class BookingServlet extends BaseBackServlet {
 		return null;
 	}
 	public String list(HttpServletRequest request, HttpServletResponse response, Page page) {
-		List<Booking> bs = bookingDAO.list(page.getStart(),page.getCount());
+		List<Booking> bs = null;
+		int total = 0;
 		//timeSlotDAO.fill(bs);
-		int total = bookingDAO.getTotal();
+		String state = request.getParameter("state");
+		String search = request.getParameter("search");
+
+		if(null!=state){
+		    bs= new BookingDAO().searchByState(state,0,20);
+            //System.out.println(id);
+    		total = bs.size();
+
+		}
+		else if(null!=search) {
+			if(search.equals("username")) {
+		      String keyword = request.getParameter("keyword");
+			  bs= new BookingDAO().searchByUser(keyword,0,20);
+    		  total = bs.size();
+		    }
+		    else if(search.equals("parkingname")) {
+		      String keyword = request.getParameter("keyword");
+			  bs= new BookingDAO().searchByParking(keyword,0,20);
+      		  total = bs.size();
+		}
+		}
+		else {
+		bs = bookingDAO.list(page.getStart(),page.getCount());
+		total = bs.size();
+
+		}
 		page.setTotal(total);
 		request.setAttribute("bs", bs);
 		request.setAttribute("page", page);
 		
 		return "admin/listBooking.jsp";
 	}
-	public String search(HttpServletRequest request, HttpServletResponse response, Page page){
-	    String keyword = request.getParameter("keyword");
-	    System.out.println(keyword);
-
-	    List<Booking> bss= new BookingDAO().search(keyword,0,20);
-	    int num = bss.size();
-//	    System.out.println(ds);
-		page.setTotal(num);
-	    request.setAttribute("bs",bss);
-		request.setAttribute("page", page);
-
-//	    request.setAttribute("num",num);
-	    return "admin/listBooking.jsp";
-	}  
+	
 }

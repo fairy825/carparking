@@ -145,47 +145,44 @@ $(function(){
 
 						<li class="active">
 							<span class="wsmenu-click"></span>
-							<a href="index.html">首页</a>
+							<a href="forehome">首页</a>
 						</li>
 						<li>
 							<span class="wsmenu-click"></span>
-							<a href="">场馆
-								<span class="arrow"></span>
+							<a href="foredistrict">场馆
 							</a>
-							<ul class="wsmenu-submenu">
-								<li>
-									<a href="http://localhost:63342/venue_management/templates/venueIntroduction.html?_ijt=4evhh60p8p0htck9hjb86bqlsgl">场馆介绍</a>
-								</li>
-								<li>
-									<a href="http://localhost:8080/venue/venueList">场馆预约</a>
-								</li>
-							</ul>
 						</li>
 						<li>
 							<span class="wsmenu-click"></span>
-							<a href="http://localhost:8080/news">新闻</a>
+							<a href="forenews">新闻</a>
 						</li>
 						<li>
 							<span class="wsmenu-click"></span>
-							<a href="http://localhost:8080/message/messageList">留言</a>
-						</li>
-						<li>
-							<span class="wsmenu-click"></span>
-							<a  th:each="u: ${user}" th:href="@{/user/look(id=${u.id})}">个人中心
+							<a href="#">个人中心
 								<span class="arrow"></span>
 							</a>
 
 							<ul class="wsmenu-submenu">
 								<li>
-									<a  th:each="u: ${user}" th:href="@{/booking/look(id=${u.id})}"  >订单查看</a>
+									<a href="forebought">订单查看</a>
 
 								</li>
 								<li>
-									<a th:each="u: ${user}" th:href="@{/user/look(id=${u.id})}">修改信息</a>
+									<a href="foreuser">修改信息</a>
+								</li>
+								<li>
+									<a href="forepassword">修改密码</a>
 								</li>
 
 							</ul>
 						</li>
+						 <li >
+                            <div align="right" style="position: relative;margin-left: 19cm;margin-right: -9cm">
+                            <span class="wsmenu-click"></span>
+                            <a href="forelogout" style="color: #0d6aad;font-family: 'Courier New', Courier, monospace;font-size: medium">注销</a>
+                            </div>
+                        </li>
+						
 
 					</ul>
 				</nav>

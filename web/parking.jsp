@@ -109,11 +109,11 @@ $(function(){
     <%@include file="parkingMessage.jsp" %>
 
     <%@include file="parkingDetail.jsp" %>
-<%--<%--%>
-   <%--Date date = new Date();--%>
-<%--int h = date.getHours();--%>
-<%--request.setAttribute("h",h);--%>
-<%--%>--%>
+<%
+Date date = new Date();
+int h = date.getHours();
+request.setAttribute("h",h);
+%>
 </div>
         </div>
     </div>
@@ -149,7 +149,7 @@ $(function(){
                                                 </tr>
                                                 </thead>
                                                 <tbody id="tbody-categoris">
-                                                 <c:forEach items="${p.timeSlots}" var="t">
+                                                 <c:forEach items="${tss}" var="t">
                                                  <c:if test="${t.beginTime>h}">
                                                 <tr>
                                                     <td>${t.beginTime}:00</td>

@@ -144,8 +144,11 @@ $(function(){
         <br><br>
         <lable  style="color: mintcream">输入新密码</lable>
         <input id="laterPass" class="laterPass" type="password" name="newPassword" id="successfulInput"  class="form-control">
-        <br><br>
+  
         <input type="hidden" name="id" value="${user.id}">
+        <br>
+        <span id="tishi" style="background:white">${msg}</span>
+        <br>
         <button type="submit" class="btn btn-primary passwordSubmit" id="btn-reg">提交</button>
     </form>
 </div>

@@ -4,14 +4,13 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import carparking.bean.*;
+import carparking.dao.BookingDAO;
 import carparking.dao.DistrictDAO;
 import carparking.dao.NewsDAO;
 import carparking.dao.ParkingDAO;
 import carparking.util.Page;
 
 public class ParkingServlet extends BaseBackServlet {
-
-	
 	public String add(HttpServletRequest request, HttpServletResponse response, Page page) {
 
 		int did = Integer.parseInt(request.getParameter("did"));
@@ -19,20 +18,18 @@ public class ParkingServlet extends BaseBackServlet {
 		District d = districtDAO.get(did);
 		float price = Float.parseFloat(request.getParameter("price"));
 		int totalSeat = Integer.parseInt(request.getParameter("totalSeat"));
-		int seat = totalSeat;
 		String name= request.getParameter("name");
 		String introduction= request.getParameter("introduction");
 		String phoneNumber= request.getParameter("phoneNumber");
 		String location= request.getParameter("location");
 		int startTime = Integer.parseInt(request.getParameter("startTime"));
 		int endTime = Integer.parseInt(request.getParameter("endTime"));
-
+     
 		Parking p = new Parking();
 		p.setName(name);
         p.setIntroduction(introduction);
         p.setPrice(price);
         p.setPhoneNumber(phoneNumber);
-        p.setSeat(seat);
         p.setTotalSeat(totalSeat);
         p.setDistrict(d);
         p.setLocation(location);
@@ -66,7 +63,6 @@ public class ParkingServlet extends BaseBackServlet {
 		int id = Integer.parseInt(request.getParameter("id"));
 		float price = Float.parseFloat(request.getParameter("price"));
 		int totalSeat = Integer.parseInt(request.getParameter("totalSeat"));
-		int seat = Integer.parseInt(request.getParameter("seat"));
 		String name= request.getParameter("name");
 		String introduction= request.getParameter("introduction");
 		String phoneNumber= request.getParameter("phoneNumber");
@@ -79,7 +75,6 @@ public class ParkingServlet extends BaseBackServlet {
         p.setIntroduction(introduction);
         p.setPrice(price);
         p.setPhoneNumber(phoneNumber);
-        p.setSeat(seat);
         p.setTotalSeat(totalSeat);
         p.setDistrict(d);
         p.setLocation(location);
@@ -95,51 +90,43 @@ public class ParkingServlet extends BaseBackServlet {
 	public String list(HttpServletRequest request, HttpServletResponse response, Page page) {
 		int did = Integer.parseInt(request.getParameter("did"));
 		District d = districtDAO.get(did);
-		
-		List<Parking> ps = parkingDAO.list(did, page.getStart(),page.getCount());
-		
-		int total = parkingDAO.getTotal(did);
+		List<Parking> ps = null;
+		int total = 0;
+		String search = request.getParameter("search");
+
+		if(null!=search) {
+			if(search.equals("name")) {
+		      String keyword = request.getParameter("keyword");
+			  ps= new ParkingDAO().searchByName(keyword,0,20);
+    		  total = ps.size();
+		    }
+		    else if(search.equals("price")) {
+		    	System.out.println("in servlet");
+			    String target = request.getParameter("target");
+		      int fromCount = Integer.parseInt(request.getParameter("fromCount"));
+			  int toCount = Integer.parseInt(request.getParameter("toCount"));
+		      ps= new ParkingDAO().select(target,fromCount,toCount,0,20);
+    		  total = ps.size();
+		    }
+		    else if(search.equals("seat")) {
+			    String target = request.getParameter("target");
+			      int fromCount = Integer.parseInt(request.getParameter("fromCount"));
+				  int toCount = Integer.parseInt(request.getParameter("toCount"));
+			      ps= new ParkingDAO().select(target,fromCount,toCount,0,20);
+	    		  total = ps.size();
+			    }
+		}
+		else {
+		ps = parkingDAO.list(did, page.getStart(),page.getCount());
+		total = parkingDAO.getTotal(did);
+		}
 		page.setTotal(total);
-		page.setParam("&did="+d.getId());
-		
+		page.setParam("&did="+did);
 		request.setAttribute("ps", ps);
 		request.setAttribute("d", d);
 		request.setAttribute("page", page);
 		
 		return "admin/listParking.jsp";
 	}
-	public String search(HttpServletRequest request, HttpServletResponse response, Page page){
-	    String keyword = request.getParameter("keyword");
-	    System.out.println(keyword);
-
-	    List<Parking> ps= new ParkingDAO().search(keyword,0,5);
-	    int num = ps.size();
-//	    System.out.println(ds);
-		page.setTotal(num);
-	    request.setAttribute("ps",ps);
-		request.setAttribute("page", page);
-
-//	    request.setAttribute("num",num);
-	    return "admin/listParking.jsp";
-	}  
-	public String select(HttpServletRequest request, HttpServletResponse response, Page page){
-	    String target = request.getParameter("target");
-		int fromCount = Integer.parseInt(request.getParameter("fromCount"));
-		int toCount = Integer.parseInt(request.getParameter("toCount"));
-
-	    //System.out.println(keyword);
-
-	    List<Parking> ps= new ParkingDAO().select(target,fromCount,toCount,0,5);
-	    int num = ps.size();
-	    System.out.println("num=");
-
-	    System.out.println(num);
-		page.setTotal(num);
-	    request.setAttribute("ps",ps);
-		request.setAttribute("page", page);
-
-//	    request.setAttribute("num",num);
-	    return "admin/listParking.jsp";
-	}  
 	
 }

@@ -11,7 +11,6 @@ public class Parking {
 	private String introduction;
 	private float price;
 	private String phoneNumber;
-	private int seat;
 	private int totalSeat;
 	private String location;
 	private District district;
@@ -97,12 +96,6 @@ public class Parking {
 	}
 	public void setPrice(float price) {
 		this.price = price;
-	}
-	public int getSeat() {
-		return seat;
-	}
-	public void setSeat(int seat) {
-		this.seat = seat;
 	}
 	public String getLocation() {
 		return location;

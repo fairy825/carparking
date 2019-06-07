@@ -10,11 +10,15 @@
 <!-- 	<link href="../css/fore/style.css" rel="stylesheet"> -->
 <!-- 我也不知道为什么上面的样式没导进来 -->
 	<script>
+	function byall(){
+        document.getElementById("nameSearchForm").hidden = true;
+        document.getElementById("priceSearchForm").hidden = true;
+        document.getElementById("seatSearchForm").hidden = true;
+	};	
 	function byname(){
         document.getElementById("nameSearchForm").hidden = false;
         document.getElementById("priceSearchForm").hidden = true;
         document.getElementById("seatSearchForm").hidden = true;
-
 	};	
 	function byprice(){
         document.getElementById("priceSearchForm").hidden = false;
@@ -36,6 +40,9 @@
      
     <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
       <li>
+         <a href="admin_parking_list?did=${d.id}" onclick="byall()">全部</a>            
+      </li>
+      <li role="presentation">
          <a href="#" onclick="byname()">停车场名称</a>            
       </li>
       <li role="presentation">
@@ -48,7 +55,7 @@
     </ul>
 </div>   
 <div hidden id="nameSearchForm">
-	<form  action="admin_parking_search" method="post" >	
+	<form  action="admin_parking_list?did=${d.id}&search=name" method="post" >	
 		<div class="searchDiv">
 			<input name="keyword" type="text" placeholder="请输入停车场名称">
 			
@@ -57,7 +64,7 @@
 	</form>	
 </div>
 <div hidden id="priceSearchForm">
-	<form action="admin_parking_select" method="post" >	
+	<form action="admin_parking_list?did=${d.id}&search=price" method="post" >	
 		<table class="categorySortBarTable">
         <tr>
             <td><input name="fromCount" class="sortBarPrice beginPrice" type="text" placeholder="请输入"></td>
@@ -72,7 +79,7 @@
 	</form>	
 </div>
 <div hidden id="seatSearchForm">
-	<form action="admin_parking_select" method="post" >	
+	<form action="admin_parking_list?did=${d.id}&search=seat" method="post" >	
 		<table class="categorySortBarTable">
         <tr>
             <td><input name="fromCount" class="sortBarPrice beginPrice" type="text" placeholder="请输入"></td>
